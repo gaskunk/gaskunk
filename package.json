@@ -4,7 +4,10 @@
   "description": "ORM for Google Apps Script + Google Sheets(Spreadsheets) as Database",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack --mode development --config webpack.config.js -w",
+    "build": "webpack --mode production --config webpack.config.js",
+    "watch": "webpack --mode production --config webpack.config.js -w",
+    "clean": "rimraf dist/"
   },
   "repository": {
     "type": "git",
@@ -17,6 +20,7 @@
   },
   "homepage": "https://github.com/shuta13/gaskunk#readme",
   "devDependencies": {
+    "rimraf": "^3.0.2",
     "ts-loader": "^8.0.15",
     "typescript": "^4.1.3",
     "webpack": "^5.20.2",
