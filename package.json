@@ -1,7 +1,7 @@
 {
   "name": "gaskunk",
   "version": "1.0.0",
-  "description": "ORM for Google Apps Script + Google Sheets(Spreadsheets) as Database",
+  "description": "TypeScript Friendly ORM for Google Apps Script + Google Sheets(Spreadsheets) as Database",
   "main": "index.js",
   "scripts": {
     "dev": "webpack --mode development --config webpack.config.js -w",

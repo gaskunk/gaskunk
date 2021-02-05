@@ -1,3 +1,5 @@
 # gaskunk
 
-"gaskunk" - NPM Package, ORM for Google Apps Script + Google Sheets with clasp.
+"gaskunk" - NPM Package, TypeScript Friendly ORM for Google Apps Script + Google Sheets with clasp.
+
+### methods

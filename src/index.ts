@@ -1,1 +1,1 @@
-console.log("gaskunk");
+export { Gaskunk } from './gaskunk';
