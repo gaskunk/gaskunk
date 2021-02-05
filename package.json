@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/shuta13/gaskunk/issues"
   },
-  "homepage": "https://github.com/shuta13/gaskunk#readme"
+  "homepage": "https://github.com/shuta13/gaskunk#readme",
+  "devDependencies": {
+    "ts-loader": "^8.0.15",
+    "typescript": "^4.1.3",
+    "webpack": "^5.20.2",
+    "webpack-cli": "^4.5.0"
+  }
 }
