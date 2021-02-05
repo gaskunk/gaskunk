@@ -1,1 +1,1 @@
-export { Gaskunk } from './gaskunk';
+export { Base } from './base';
