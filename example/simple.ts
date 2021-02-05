@@ -1,1 +1,3 @@
-import * as Gaskunk from '../src';
+import * as Gaskunk from '../dist';
+
+Gaskunk.Base.connection('');
