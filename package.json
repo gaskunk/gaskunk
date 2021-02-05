@@ -1,0 +1,19 @@
+{
+  "name": "gaskunk",
+  "version": "1.0.0",
+  "description": "ORM for Google Apps Script + Google Sheets(Spreadsheets) as Database",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shuta13/gaskunk.git"
+  },
+  "author": "did0es <hollyflatpair@outlook.jp> (https://did0es.me)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shuta13/gaskunk/issues"
+  },
+  "homepage": "https://github.com/shuta13/gaskunk#readme"
+}
