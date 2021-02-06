@@ -1,3 +1,5 @@
 export const connection = (sheetsProperties: any) => {
-  console.log(sheetsProperties);
+  return new Promise((resolve, reject) => {
+    resolve('resolved');
+  });
 };
