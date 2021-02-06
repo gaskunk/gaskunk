@@ -1,3 +1,4 @@
 import * as Gaskunk from '../dist';
 
-Gaskunk.Base.connection('');
+const skunk = new Gaskunk.Create({ name: 'poo' });
+skunk.all.inspect();
