@@ -1,1 +1,1 @@
-export const connection = () => {};
+export class Connection {}

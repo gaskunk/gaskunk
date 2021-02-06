@@ -4,9 +4,9 @@
   "description": "TypeScript Friendly ORM for Google Apps Script + Google Sheets(Spreadsheets) as Database",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development --config webpack.config.js -w",
-    "build": "webpack --mode production --config webpack.config.js",
-    "watch": "webpack --mode production --config webpack.config.js -w",
+    "build": "npx tsc",
+    "watch": "npx tsc -w",
+    "prepublish": "webpack --mode production --config webpack.config.js",
     "clean": "rimraf dist/"
   },
   "repository": {
@@ -25,5 +25,6 @@
     "typescript": "^4.1.3",
     "webpack": "^5.20.2",
     "webpack-cli": "^4.5.0"
-  }
+  },
+  "private": true
 }
