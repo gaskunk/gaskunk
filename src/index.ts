@@ -1,2 +1,3 @@
-export { Connection } from './connection';
-export { Create } from './create';
+export { connection } from './connection';
+
+export { Entity } from './entity';

@@ -1,1 +1,3 @@
-export class Connection {}
+export const connection = (sheetsProperties: any) => {
+  console.log(sheetsProperties);
+};
