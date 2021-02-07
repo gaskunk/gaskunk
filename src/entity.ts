@@ -1,4 +1,10 @@
 export class Entity {
+  private sheets: GoogleAppsScript.Spreadsheet.Sheet | null = null;
+
+  constructor() {
+    this.sheets = SpreadsheetApp.getActiveSheet();
+  }
+
   create(tableName: string) {
     // TODO: Insert new sheet
     // console.log(this);
