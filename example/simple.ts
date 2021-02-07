@@ -15,4 +15,4 @@ skunk.id = 0;
 skunk.name = 'gaskunk';
 skunk.description = '🦨';
 
-skunk.create();
+skunk.save();

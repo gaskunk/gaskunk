@@ -1,13 +1,13 @@
 export class Entity {
   create() {
-    // TODO: Create sheet
+    // TODO: Insert sheet
     // console.log(this);
   }
   drop() {
     // TODO: Delete sheet
   }
   save() {
-    // TODO: Add data
+    // TODO: Create table(data)
   }
   find() {
     // TODO: Get all data
