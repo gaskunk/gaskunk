@@ -1,6 +1,6 @@
 export class Entity {
   create() {
-    // TODO: Insert sheet
+    // TODO: Insert new sheet
     // console.log(this);
   }
   drop() {
@@ -8,6 +8,16 @@ export class Entity {
   }
   save() {
     // TODO: Create table(data)
+    const tableName = this.constructor.name;
+    console.log(tableName);
+
+    const columnNameAndInitialValues = Object.entries(this);
+    columnNameAndInitialValues.map((value) => {
+      /**
+       * value[0] : column name
+       * value[1] : initial data
+       */
+    });
   }
   find() {
     // TODO: Get all data
