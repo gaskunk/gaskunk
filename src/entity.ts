@@ -1,9 +1,9 @@
 export class Entity {
-  create() {
+  create(tableName: string) {
     // TODO: Insert new sheet
     // console.log(this);
   }
-  drop() {
+  clear(tableName: string) {
     // TODO: Delete sheet
   }
   save() {

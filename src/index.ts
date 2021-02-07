@@ -1,2 +1,2 @@
 export { connection } from './connection';
-export { Entity } from './entity';
+export { Entity as default } from './entity';
