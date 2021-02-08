@@ -7,7 +7,8 @@
     "build": "npx tsc",
     "watch": "npx tsc -w",
     "prepublish": "webpack --mode production --config webpack.config.js",
-    "clean": "rimraf dist/"
+    "clean": "rimraf dist/",
+    "postinstall": "npx replace-in-file \"declare var console\" \"//declare var console\" node_modules/@types/google-apps-script/google-apps-script.base.d.ts"
   },
   "repository": {
     "type": "git",
