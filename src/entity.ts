@@ -24,6 +24,8 @@ export class Entity {
        * value[1] : initial data
        */
     });
+
+    return columnNameAndInitialValues;
   }
   find() {
     // TODO: Get all data
