@@ -3,17 +3,19 @@ import { Entity } from '../src/entity';
 jest.mock('../src/entity');
 const EntityMock = Entity as jest.Mock;
 
+const SHEETS_TABLE_INIT = [
+  ['id', 0],
+  ['name', 'gaskunk'],
+  ['description', '🦨'],
+];
+
 beforeAll(() => {
   EntityMock.mockImplementationOnce(() => {
     return {
       create: () => {},
       clear: () => {},
       save: () => {
-        return [
-          ['id', 0],
-          ['name', 'gaskunk'],
-          ['description', '🦨'],
-        ];
+        return SHEETS_TABLE_INIT;
       },
       find: () => {},
       findBy: () => {},
@@ -37,10 +39,6 @@ describe('Entity', () => {
     skunk.name = 'gaskunk';
     skunk.description = '🦨';
     expect(EntityMock).toHaveBeenCalled();
-    expect(skunk.save()).toMatchObject([
-      ['id', 0],
-      ['name', 'gaskunk'],
-      ['description', '🦨'],
-    ]);
+    expect(skunk.save()).toMatchObject(SHEETS_TABLE_INIT);
   });
 });
