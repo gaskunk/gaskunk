@@ -1,4 +1,5 @@
-import Entity, { connection } from '../dist';
+import Entity from '../dist';
+import connection from '../dist/connection';
 
 // Call this if you have already created sheets.
 connection({});
