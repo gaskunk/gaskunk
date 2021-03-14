@@ -1,37 +1,23 @@
+import { Table } from './table';
+
 export class Entity {
   private sheets: GoogleAppsScript.Spreadsheet.Spreadsheet | null = null;
+  private table = new Table(this.sheets);
 
   constructor(sheets?: GoogleAppsScript.Spreadsheet.Spreadsheet) {
     this.sheets = sheets || SpreadsheetApp.getActive();
-  }
-
-  private create(name: string) {
-    this.sheets?.insertSheet(name);
-  }
-
-  clear(name: string) {
-    const target = this.sheets?.getSheetByName(name);
-    if (target) {
-      this.sheets?.deleteSheet(target);
-      return `Cleared ${name}`;
-    }
-    return new Error(`Cannot clear ${name}`);
   }
 
   save() {
     /**
      * Insert sheet as new table
      */
-    const tableName = this.constructor.name;
-    this.create(tableName);
+    this.table.create(this.constructor.name);
 
-    const columnNameAndInitialValues = Object.entries(this);
-    columnNameAndInitialValues.forEach((value) => {
-      /**
-       * value[0] : column name
-       * value[1] : initial data
-       */
-    });
+    const members = Object.entries(this);
+    const columnNameAndInitialValues = members.filter(
+      (member) => !member.includes('sheets') && !member.includes('table')
+    );
 
     return columnNameAndInitialValues;
   }

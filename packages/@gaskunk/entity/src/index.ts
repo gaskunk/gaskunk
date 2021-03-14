@@ -1,1 +1,1 @@
-export * from './entity';
+export { Entity } from './entity';

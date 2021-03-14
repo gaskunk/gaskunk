@@ -1,4 +1,4 @@
-// import Entity from '../src/lib';
+// import { Entity } from '../../../packages/@gaskunk/entity/src';
 
 // class Skunk extends Entity {
 //   id!: number;
