@@ -1,40 +1,18 @@
 {
-  "name": "gaskunk",
+  "private": true,
   "version": "1.0.0",
-  "description": "TypeScript Friendly ORM for Google Apps Script + Google Sheets(Spreadsheets) as Database",
-  "main": "index.js",
-  "scripts": {
-    "build": "npx tsc",
-    "watch": "npx tsc -w",
-    "prepublish": "webpack --mode production --config webpack.config.js",
-    "clean": "rimraf dist/",
-    "test": "jest",
-    "postinstall": "npx replace-in-file \"declare var console\" \"//declare var console\" node_modules/@types/google-apps-script/google-apps-script.base.d.ts"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/shuta13/gaskunk.git"
-  },
-  "author": "did0es <hollyflatpair@outlook.jp> (https://did0es.me)",
+  "license": "MIT",
   "engines": {
     "node": "~12.4.0"
   },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/shuta13/gaskunk/issues"
+  "scripts": {
+    "postinstall": "npx replace-in-file \"declare var console\" \"//declare var console\" node_modules/@types/google-apps-script/google-apps-script.base.d.ts"
   },
-  "homepage": "https://github.com/shuta13/gaskunk#readme",
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
   "devDependencies": {
-    "@types/google-apps-script": "^1.0.22",
-    "@types/jest": "^26.0.20",
-    "jest": "^26.6.3",
-    "rimraf": "^3.0.2",
-    "ts-jest": "^26.5.0",
-    "ts-loader": "^8.0.15",
-    "typescript": "^4.1.3",
-    "webpack": "^5.20.2",
-    "webpack-cli": "^4.5.0"
-  },
-  "private": true,
-  "dependencies": {}
+    "typescript": "^4.2.3"
+  }
 }

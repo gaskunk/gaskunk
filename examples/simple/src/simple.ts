@@ -1,7 +1,6 @@
-import Entity from '../dist';
-import connection from '../dist/connection';
+import Entity from '../../../packages/gaskunk/lib';
+import connection from '../../../packages/gaskunk/lib/connection';
 
-// Call this if you have already created sheets.
 connection({});
 
 class Skunk extends Entity {
