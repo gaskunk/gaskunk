@@ -7,7 +7,7 @@
     "build": "webpack",
     "deploy": "yarn build && clasp push",
     "open": "clasp open",
-    "typecheck": "tsc -p ."
+    "typecheck": "tsc --noEmit"
   },
   "license": "MIT",
   "devDependencies": {
