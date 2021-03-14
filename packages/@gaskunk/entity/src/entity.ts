@@ -40,12 +40,21 @@ export class Entity {
   }
   find() {
     // TODO: Get all data
+    const tableName = this.constructor.name;
+    const target = this.sheets?.getSheetByName(tableName);
+    const range = target?.getDataRange();
+    const values = range?.getValues();
+
+    // TODO: get values excludes column names
+    const columnNames = values?.map((value) => value[0]);
   }
   findBy() {
     // TODO: Get data by params
   }
   delete() {
-    // TODO: Delete data
+    /**
+     * Delete all data in table
+     */
     const tableName = this.constructor.name;
     const target = this.sheets?.getSheetByName(tableName);
     const result = target?.clearContents();

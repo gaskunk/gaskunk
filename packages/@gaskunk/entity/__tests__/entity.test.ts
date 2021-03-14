@@ -1,5 +1,10 @@
 import { Entity } from '../src/entity';
 
+const SHEETS_INITIAL_VALUES = {
+  columnNames: ['id', 'name', 'description'],
+  initialValues: [0, 'gaskunk', '🦨'],
+};
+
 SpreadsheetApp['getActive'] = jest.fn(
   () =>
     (({
@@ -14,11 +19,6 @@ SpreadsheetApp['getActive'] = jest.fn(
       ),
     } as unknown) as GoogleAppsScript.Spreadsheet.Spreadsheet)
 );
-
-const SHEETS_INITIAL_VALUES = {
-  columnNames: ['id', 'name', 'description'],
-  initialValues: [0, 'gaskunk', '🦨'],
-};
 
 class Skunk extends Entity {
   id!: number;
