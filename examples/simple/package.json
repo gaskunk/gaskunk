@@ -1,12 +1,12 @@
 {
   "private": true,
   "name": "simple",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "license": "MIT",
   "scripts": {
     "push": "npx clasp push",
     "open": "npx clasp open",
-    "postinstall": "cp -r ../../packages/gaskunk/lib src/lib"
+    "postinstall": "cp -r ../../packages/gaskunk/lib src"
   },
   "devDependencies": {
     "@types/google-apps-script": "^1.0.27"

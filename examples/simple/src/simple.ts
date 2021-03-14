@@ -1,15 +1,15 @@
-import Entity from '../src/lib';
+// import Entity from '../src/lib';
 
-class Skunk extends Entity {
-  id!: number;
-  name!: string;
-  description!: string;
-}
+// class Skunk extends Entity {
+//   id!: number;
+//   name!: string;
+//   description!: string;
+// }
 
-const skunk = new Skunk();
+// const skunk = new Skunk();
 
-skunk.id = 0;
-skunk.name = 'gaskunk';
-skunk.description = '🦨';
+// skunk.id = 0;
+// skunk.name = 'gaskunk';
+// skunk.description = '🦨';
 
-skunk.save();
+// skunk.save();
