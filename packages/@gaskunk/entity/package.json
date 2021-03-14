@@ -1,20 +1,20 @@
 {
-  "private": true,
-  "name": "gaskunk",
+  "name": "@gaskunk/entity",
   "version": "0.1.0",
-  "author": "did0es <hollyflatpair@outlook.jp> (https://did0es.me)",
+  "description": "entity of gaskunk",
   "bugs": {
     "url": "https://github.com/shuta13/gaskunk/issues"
   },
   "homepage": "https://github.com/shuta13/gaskunk#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/shuta13/gaskunk.git"
+    "url": "https://github.com/shuta13/gaskunk/tree/main/packages/@gaskunk/entity",
+    "directory": "packages/@gaskunk/entity"
   },
+  "license": "MIT",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "clean": "rimraf lib/",
     "test": "jest"
   }
 }
