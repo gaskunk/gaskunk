@@ -10,16 +10,33 @@ export class Entity {
 
   save() {
     /**
-     * Insert sheet as new table
+     * Insert new sheet as table
      */
-    this.table.create(this.constructor.name);
+    const tableName = this.constructor.name;
+    this.table.create(tableName);
 
-    const members = Object.entries(this);
-    const columnNameAndInitialValues = members.filter(
-      (member) => !member.includes('sheets') && !member.includes('table')
+    const entityProperties = Object.entries(this);
+    const values = entityProperties.filter(
+      (property) => !property.includes('sheets') && !property.includes('table')
     );
 
-    return columnNameAndInitialValues;
+    /**
+     * Insert column name
+     */
+    const colunmNames = values.map((value) => value[0]);
+    const target = this.sheets?.getSheetByName(tableName);
+    target?.appendRow(colunmNames);
+
+    /**
+     * Insert initial values
+     */
+    const initialValues = values.map((value) => value[1]);
+    target?.appendRow(initialValues);
+
+    return {
+      columnNames: colunmNames,
+      initialValues: initialValues,
+    };
   }
   find() {
     // TODO: Get all data
@@ -29,6 +46,11 @@ export class Entity {
   }
   delete() {
     // TODO: Delete data
+    const tableName = this.constructor.name;
+    const target = this.sheets?.getSheetByName(tableName);
+    const result = target?.clearContents();
+    if (result) return `Deleted ${tableName} data`;
+    return new Error(`Cannot deleted ${tableName} data`);
   }
   deleteBy() {
     // TODO: Delete data by params
