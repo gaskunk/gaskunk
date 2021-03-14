@@ -4,11 +4,11 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
-    "push": "npx clasp push",
-    "open": "npx clasp open",
-    "postinstall": "cp -r ../../packages/gaskunk/lib src"
+    "push": "clasp push",
+    "open": "clasp open"
   },
   "devDependencies": {
+    "@google/clasp": "^2.3.0",
     "@types/google-apps-script": "^1.0.27"
   }
 }
