@@ -2,5 +2,8 @@
   "private": true,
   "name": "simple",
   "version": "1.0.0",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/google-apps-script": "^1.0.27"
+  }
 }

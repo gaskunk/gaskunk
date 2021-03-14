@@ -90,3 +90,5 @@ typings/
 .dynamodb/
 
 packages/**/lib
+
+examples/**/.clasp.json

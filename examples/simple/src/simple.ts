@@ -1,18 +1,18 @@
-import Entity from '../../../packages/gaskunk/lib';
-import connection from '../../../packages/gaskunk/lib/connection';
+// import Entity from '../../../packages/gaskunk/lib';
+// import connection from '../../../packages/gaskunk/lib/connection';
 
-connection({});
+// connection({});
 
-class Skunk extends Entity {
-  id!: number;
-  name!: string;
-  description!: string;
-}
+// class Skunk extends Entity {
+//   id!: number;
+//   name!: string;
+//   description!: string;
+// }
 
-const skunk = new Skunk();
+// const skunk = new Skunk();
 
-skunk.id = 0;
-skunk.name = 'gaskunk';
-skunk.description = '🦨';
+// skunk.id = 0;
+// skunk.name = 'gaskunk';
+// skunk.description = '🦨';
 
-skunk.save();
+// skunk.save();
