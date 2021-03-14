@@ -16,6 +16,9 @@
     "url": "git+https://github.com/shuta13/gaskunk.git"
   },
   "author": "did0es <hollyflatpair@outlook.jp> (https://did0es.me)",
+  "engines": {
+    "node": "~12.4.0"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/shuta13/gaskunk/issues"
