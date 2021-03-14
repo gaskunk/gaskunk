@@ -1,7 +1,4 @@
 // import Entity from '../../../packages/gaskunk/lib';
-// import connection from '../../../packages/gaskunk/lib/connection';
-
-// connection({});
 
 // class Skunk extends Entity {
 //   id!: number;
