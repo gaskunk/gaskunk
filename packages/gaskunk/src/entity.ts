@@ -1,25 +1,29 @@
 export class Entity {
-  private create(
-    sheets: GoogleAppsScript.Spreadsheet.Spreadsheet,
-    name: string
-  ) {
-    sheets.insertSheet(name);
+  private sheets: GoogleAppsScript.Spreadsheet.Spreadsheet | null = null;
+
+  constructor(sheets?: GoogleAppsScript.Spreadsheet.Spreadsheet) {
+    this.sheets = sheets || SpreadsheetApp.getActive();
   }
-  clear(sheets: GoogleAppsScript.Spreadsheet.Spreadsheet, name: string) {
-    const target = sheets.getSheetByName(name);
+
+  private create(name: string) {
+    this.sheets?.insertSheet(name);
+  }
+
+  clear(name: string) {
+    const target = this.sheets?.getSheetByName(name);
     if (target) {
-      sheets.deleteSheet(target);
+      this.sheets?.deleteSheet(target);
+      return `Cleared ${name}`;
     }
     return new Error(`Cannot clear ${name}`);
   }
-  save() {
-    const sheets = SpreadsheetApp.getActiveSpreadsheet();
 
+  save() {
     /**
      * Insert sheet as new table
      */
     const tableName = this.constructor.name;
-    this.create(sheets, tableName);
+    this.create(tableName);
 
     const columnNameAndInitialValues = Object.entries(this);
     columnNameAndInitialValues.forEach((value) => {
