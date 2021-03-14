@@ -10,6 +10,17 @@ function doGet() {
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/events.ts":
+/*!***********************!*\
+  !*** ./src/events.ts ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"doGet\": () => (/* binding */ doGet)\n/* harmony export */ });\n/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dayjs */ \"../../node_modules/dayjs/dayjs.min.js\");\n/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var dayjs_locale_ja__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! dayjs/locale/ja */ \"../../node_modules/dayjs/locale/ja.js\");\n/* harmony import */ var dayjs_locale_ja__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(dayjs_locale_ja__WEBPACK_IMPORTED_MODULE_1__);\n\n\ndayjs__WEBPACK_IMPORTED_MODULE_0___default().locale('ja');\nfunction doGet() {\n  const date = dayjs__WEBPACK_IMPORTED_MODULE_0___default()().format('YYYY/MM/DD');\n  return ContentService.createTextOutput(JSON.stringify(date)).setMimeType(ContentService.MimeType.JSON);\n}\n\n//# sourceURL=webpack://with-other-libraries/./src/events.ts?");
+
+/***/ }),
+
 /***/ "./src/index.ts":
 /*!**********************!*\
   !*** ./src/index.ts ***!
@@ -17,18 +28,7 @@ function doGet() {
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./main */ \"./src/main.ts\");\n/**\n * @see https://www.ykicchan.dev/posts/2020-07-12\n */\n\n__webpack_require__.g.doGet = _main__WEBPACK_IMPORTED_MODULE_0__.doGet;\n\n//# sourceURL=webpack://with-other-libraries/./src/index.ts?");
-
-/***/ }),
-
-/***/ "./src/main.ts":
-/*!*********************!*\
-  !*** ./src/main.ts ***!
-  \*********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"doGet\": () => (/* binding */ doGet)\n/* harmony export */ });\n/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dayjs */ \"../../node_modules/dayjs/dayjs.min.js\");\n/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var dayjs_locale_ja__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! dayjs/locale/ja */ \"../../node_modules/dayjs/locale/ja.js\");\n/* harmony import */ var dayjs_locale_ja__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(dayjs_locale_ja__WEBPACK_IMPORTED_MODULE_1__);\n\n\ndayjs__WEBPACK_IMPORTED_MODULE_0___default().locale('ja');\nfunction doGet() {\n  const date = dayjs__WEBPACK_IMPORTED_MODULE_0___default()().format('YYYY/MM/DD');\n  return ContentService.createTextOutput(JSON.stringify(date)).setMimeType(ContentService.MimeType.JSON);\n}\n\n//# sourceURL=webpack://with-other-libraries/./src/main.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./events */ \"./src/events.ts\");\n/**\n * @see https://www.ykicchan.dev/posts/2020-07-12\n */\n\n__webpack_require__.g.doGet = _events__WEBPACK_IMPORTED_MODULE_0__.doGet;\n\n//# sourceURL=webpack://with-other-libraries/./src/index.ts?");
 
 /***/ }),
 
