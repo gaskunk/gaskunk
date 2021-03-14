@@ -6,7 +6,7 @@ interface DoGetEvents extends GoogleAppsScript.Events.DoGet {
 
 interface DoPostEvents extends GoogleAppsScript.Events.DoPost {}
 
-function createOutput(message: string) {
+function createOutput(message: any) {
   return ContentService.createTextOutput(
     JSON.stringify({ status: 200, message: message })
   ).setMimeType(ContentService.MimeType.JSON);
@@ -23,7 +23,7 @@ export function doGet(e: DoGetEvents) {
 
 export function doPost(e: DoPostEvents) {
   if (e.postData) {
-    return createOutput(e.postData.contents);
+    return createOutput(JSON.parse(e.postData.contents));
   }
   return createOutput('post error!');
 }
