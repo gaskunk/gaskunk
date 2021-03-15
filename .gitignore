@@ -92,3 +92,6 @@ typings/
 packages/**/lib
 
 examples/**/.clasp.json
+
+# Experimental dir 
+examples/with-other-libraries/dist/index.js

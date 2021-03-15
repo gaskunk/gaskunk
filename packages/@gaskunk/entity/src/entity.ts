@@ -47,7 +47,6 @@ export class Entity {
 
     // TODO: get values excludes column names
     const columnNames = values?.map((value) => value[0]);
-
     return columnNames;
   }
   findBy() {
