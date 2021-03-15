@@ -33,26 +33,32 @@ export class Entity {
     const initialValues = values.map((value) => value[1]);
     target?.appendRow(initialValues);
 
-    return {
-      columnNames: colunmNames,
-      initialValues: initialValues,
-    };
+    return [colunmNames, initialValues];
   }
   find() {
     // TODO: Get all data
     const tableName = this.constructor.name;
     const target = this.sheets?.getSheetByName(tableName);
     const range = target?.getDataRange();
-    const values = range?.getValues();
+    const SpreadsheetValues = range?.getValues();
 
     /**
      * Get first row values as column names
      */
-    const columnNames = values?.map((value) => value[0]);
+    const columnNames = SpreadsheetValues?.reduce((prev, cur, index) => {
+      if (index == 0) return cur;
+      return prev;
+    }, []);
 
     // TODO: get values excludes column names
+    const values = SpreadsheetValues?.filter((value) => value !== columnNames);
 
-    return columnNames;
+    if (values) {
+      console.log([columnNames, ...values]);
+      return [columnNames, ...values];
+    }
+
+    return [columnNames, []];
   }
   findBy() {
     // TODO: Get data by params
