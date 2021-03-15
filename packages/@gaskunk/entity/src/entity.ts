@@ -45,8 +45,13 @@ export class Entity {
     const range = target?.getDataRange();
     const values = range?.getValues();
 
-    // TODO: get values excludes column names
+    /**
+     * Get first row values as column names
+     */
     const columnNames = values?.map((value) => value[0]);
+
+    // TODO: get values excludes column names
+
     return columnNames;
   }
   findBy() {

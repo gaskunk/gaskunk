@@ -1,3 +1,5 @@
+import * as Service from '../../utils/service';
+
 interface DoGetEvents extends GoogleAppsScript.Events.DoGet {
   parameter: {
     ping?: string;
@@ -6,24 +8,20 @@ interface DoGetEvents extends GoogleAppsScript.Events.DoGet {
 
 interface DoPostEvents extends GoogleAppsScript.Events.DoPost {}
 
-function createOutput(message: any) {
-  return ContentService.createTextOutput(
-    JSON.stringify({ status: 200, message: message })
-  ).setMimeType(ContentService.MimeType.JSON);
-}
-
 export function doGet(e: DoGetEvents) {
   const { ping } = e.parameter;
 
   if (ping) {
-    return createOutput(ping);
+    return Service.createOutput({ message: ping });
   }
-  return createOutput('get error!');
+  return Service.createOutput({ message: 'invalid get request' });
 }
 
 export function doPost(e: DoPostEvents) {
   if (e.postData) {
-    return createOutput(JSON.parse(e.postData.contents));
+    return Service.createOutput({
+      message: JSON.parse(e.postData.contents),
+    });
   }
-  return createOutput('post error!');
+  return Service.createOutput({ message: 'invalid post request' });
 }
