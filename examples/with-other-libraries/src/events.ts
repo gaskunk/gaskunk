@@ -6,15 +6,16 @@ dayjs.locale('ja');
 
 interface DoGetEvents extends GoogleAppsScript.Events.DoGet {
   parameter: {
-    action?: 'Table';
+    action?: 'user';
   };
 }
 
 export function doGet(e: DoGetEvents) {
-  if (e.parameter.action === 'Table') {
+  if (e.parameter.action === 'user') {
     const ss = SpreadsheetApp.getActiveSpreadsheet();
-    const sheet = ss.getSheetByName('Table');
-    const values = sheet?.getDataRange().getValues();
+    const sheet = ss.getSheetByName('User');
+    const range = sheet?.getDataRange();
+    const values = range?.getValues();
     return createOutput({ message: 'Spreadsheet values', data: values });
   }
   const date = dayjs().format('YYYY/MM/DD');
