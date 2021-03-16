@@ -16,5 +16,5 @@
     "build": "tsc",
     "watch": "tsc -w"
   },
-  "gitHead": "659f002dcac5dc06fd9a01ee27d104a8ce59f5fd"
+  "gitHead": "52e0677c63540372f90d698945a60262eaeb3133"
 }

@@ -1,5 +1,4 @@
 {
-  "private": true,
   "name": "with-other-libraries",
   "version": "0.1.0",
   "main": "index.js",
