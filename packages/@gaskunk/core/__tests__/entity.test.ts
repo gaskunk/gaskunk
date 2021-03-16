@@ -84,6 +84,14 @@ describe('Data', () => {
     );
   });
 
+  it('hasId', () => {
+    const skunk = new Skunk();
+    skunk.id = 0;
+    skunk.name = 'gaskunk';
+    skunk.description = '🦨';
+    expect(skunk.hasId(skunk)).toBe(true);
+  });
+
   it('methods', () => {
     const skunk = new Skunk();
     expect(

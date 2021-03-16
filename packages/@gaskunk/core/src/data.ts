@@ -14,6 +14,7 @@ import type {
 import { CannotDeleteAllError } from '@gaskunk/error';
 import { DataLogger } from '@gaskunk/logger';
 import { transpile } from 'typescript';
+import { Entity } from './entity';
 
 export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
   const logger = new DataLogger();
@@ -22,18 +23,18 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
     const { tableName } = args;
     const target = sheets?.getSheetByName(tableName);
     const range = target?.getDataRange();
-    const SpreadsheetValues = range?.getValues();
+    const spreadsheetValues = range?.getValues();
 
     /**
      * Get first row values as column names
      */
-    const columnNames = SpreadsheetValues?.reduce((prev, cur, index) => {
+    const columnNames = spreadsheetValues?.reduce((prev, cur, index) => {
       if (index == 0) return cur;
       return prev;
     }, []);
 
     // TODO: get values excludes column names
-    const values = SpreadsheetValues?.filter((value) => value !== columnNames);
+    const values = spreadsheetValues?.filter((value) => value !== columnNames);
 
     if (values) {
       return [columnNames, ...values];
@@ -56,7 +57,42 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
 
   const update = (_args: UpdateArgs) => {};
 
-  const hasId = (_args: HasIdArgs) => {};
+  const hasId = (args: HasIdArgs<Entity>) => {
+    const { tableName, entity } = args;
+    const target = sheets.getSheetByName(tableName);
+    const range = target?.getDataRange();
+    const spreadsheetValues = range?.getValues();
+
+    /**
+     * Array of entity properties
+     */
+    const properties = Object.entries(entity).filter(
+      (value) => !value.includes('sheets')
+    );
+    const entityValues = properties.map((property) => property[1]);
+
+    /**
+     * Compare row values of Spreadsheet, entity values
+     */
+    const hasContravariance = (superArray: any[], subArray: any[]) => {
+      return (
+        superArray.length >= subArray.length &&
+        superArray.every((elem, index) => elem === subArray[index])
+      );
+    };
+
+    const foundValues = spreadsheetValues?.filter((value) =>
+      hasContravariance(value, entityValues)
+    );
+
+    if (!foundValues) return false;
+
+    /**
+     * foundValues[0]: primaryColumn value
+     */
+    if (foundValues[0] != null) return true;
+    else return false;
+  };
 
   const getId = (_args: GetIdArgs) => {};
 

@@ -16,7 +16,7 @@ export const getSheet = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
     create({ tableName });
 
     /**
-     * Get sub class properties
+     * Get entity properties
      */
     const values = properties.filter(
       (property) => !property.includes('sheets')
@@ -31,6 +31,7 @@ export const getSheet = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
 
     /**
      * Insert initial values
+     * FIXME: index 0 value as primary
      */
     const initialValues = values.map((value) => value[1]);
     target?.appendRow(initialValues);

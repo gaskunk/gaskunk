@@ -26,8 +26,8 @@ export interface RemoveByArgs extends Base {}
 
 export interface UpdateArgs extends Base {}
 
-export interface HasIdArgs extends Base {
-  id: number;
+export interface HasIdArgs<T> extends Base {
+  entity: T;
 }
 
 export interface GetIdArgs extends Base {}

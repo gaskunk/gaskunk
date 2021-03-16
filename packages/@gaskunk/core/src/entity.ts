@@ -55,7 +55,10 @@ export class Entity {
   public update() {}
 
   // TODO: Check values by id
-  public hasId() {}
+  public hasId(entity: Entity) {
+    const tableName = this.constructor.name;
+    return this.sheets && getData(this.sheets).hasId({ tableName, entity });
+  }
 
   // TODO: Get id by values
   public getId() {}
