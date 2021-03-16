@@ -1,0 +1,28 @@
+{
+  "name": "@gaskunk/logger",
+  "version": "0.1.2",
+  "description": "logger of gaskunk",
+  "author": "did0es <hollyflatpair@outlook.jp> (https://did0es.me/)",
+  "homepage": "https://github.com/shuta13/gaskunk#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shuta13/gaskunk/tree/main/packages/@gaskunk/logger",
+    "directory": "packages/@gaskunk/logger"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "bugs": {
+    "url": "https://github.com/shuta13/gaskunk/issues"
+  }
+}
