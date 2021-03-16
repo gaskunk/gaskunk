@@ -9,7 +9,7 @@ import type {
   OrderArgs,
   SaveArgs,
   UpdateArgs,
-} from './types/sheets/sheets';
+} from '@gaskunk/types';
 
 export const getTable = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
   const create = (args: CreateArgs) => {

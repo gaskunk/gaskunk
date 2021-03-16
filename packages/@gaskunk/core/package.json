@@ -28,6 +28,6 @@
     "axios": "^0.21.1"
   },
   "dependencies": {
-    "@gaskunk/types": "0.1.1"
+    "@gaskunk/types": "0.1.2"
   }
 }
