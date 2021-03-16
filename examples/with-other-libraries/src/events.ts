@@ -1,5 +1,5 @@
 import { Skunk } from './entity';
-import { createOutput } from '../../utils/gas-content-service/gas-content-service';
+import { createOutput } from '../../utils/gas-content-service';
 interface DoGetEvents extends GoogleAppsScript.Events.DoGet {
   parameter: {
     action?: string;
