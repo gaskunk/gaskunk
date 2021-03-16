@@ -1,4 +1,4 @@
-import * as Service from '../../utils/service';
+import * as GASContentService from '../../utils/gas-content-service';
 
 interface DoGetEvents extends GoogleAppsScript.Events.DoGet {
   parameter: {
@@ -12,16 +12,16 @@ export function doGet(e: DoGetEvents) {
   const { ping } = e.parameter;
 
   if (ping) {
-    return Service.createOutput({ message: ping });
+    return GASContentService.createOutput({ message: ping });
   }
-  return Service.createOutput({ message: 'invalid get request' });
+  return GASContentService.createOutput({ message: 'invalid get request' });
 }
 
 export function doPost(e: DoPostEvents) {
   if (e.postData) {
-    return Service.createOutput({
+    return GASContentService.createOutput({
       message: JSON.parse(e.postData.contents),
     });
   }
-  return Service.createOutput({ message: 'invalid post request' });
+  return GASContentService.createOutput({ message: 'invalid post request' });
 }

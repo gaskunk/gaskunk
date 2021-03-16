@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import 'dayjs/locale/ja';
-import { createOutput } from '../../utils/service/service';
+import { createOutput } from '../../utils/gas-content-service/gas-content-service';
 
 dayjs.locale('ja');
 
