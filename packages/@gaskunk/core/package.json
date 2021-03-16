@@ -17,5 +17,5 @@
     "watch": "tsc -w",
     "test": "jest"
   },
-  "gitHead": "07a9afd6d9ac5e17225dfa1ca5417d8ee8e0817d"
+  "gitHead": "659f002dcac5dc06fd9a01ee27d104a8ce59f5fd"
 }
