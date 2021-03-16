@@ -1,15 +1,15 @@
 {
-  "name": "@gaskunk/entity",
+  "name": "@gaskunk/core",
   "version": "0.1.0",
-  "description": "entity of gaskunk",
+  "description": "core of gaskunk",
   "bugs": {
     "url": "https://github.com/shuta13/gaskunk/issues"
   },
   "homepage": "https://github.com/shuta13/gaskunk#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/shuta13/gaskunk/tree/main/packages/@gaskunk/entity",
-    "directory": "packages/@gaskunk/entity"
+    "url": "https://github.com/shuta13/gaskunk/tree/main/packages/@gaskunk/core",
+    "directory": "packages/@gaskunk/core"
   },
   "license": "MIT",
   "scripts": {

@@ -15,6 +15,9 @@ export class Entity {
     const tableName = this.constructor.name;
     this.table.create(tableName);
 
+    /**
+     * Get sub class properties
+     */
     const entityProperties = Object.entries(this);
     const values = entityProperties.filter(
       (property) => !property.includes('sheets') && !property.includes('table')

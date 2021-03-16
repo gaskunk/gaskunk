@@ -28,6 +28,9 @@ SpreadsheetApp['getActive'] = jest.fn(
 );
 
 class Skunk extends Entity {
+  constructor() {
+    super();
+  }
   id!: number;
   name!: string;
   description!: string;
