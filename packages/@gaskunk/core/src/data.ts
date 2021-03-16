@@ -17,7 +17,7 @@ import { transpile } from 'typescript';
 import { Entity } from './entity';
 
 /**
- * Check contravariant of arrays
+ * Check contravariance of arrays
  */
 const hasContravariance = (superArray: any[], subArray: any[]) => {
   return (
