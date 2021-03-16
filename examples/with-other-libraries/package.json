@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "with-other-libraries",
-  "version": "0.1.0",
+  "version": "0.1.4",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
@@ -18,6 +18,7 @@
     "@babel/plugin-proposal-optional-chaining": "^7.13.8",
     "@babel/preset-env": "^7.13.10",
     "@babel/preset-typescript": "^7.13.0",
+    "@gaskunk/core": "0.1.4",
     "@google/clasp": "^2.3.0",
     "@types/google-apps-script": "^1.0.27",
     "babel-loader": "^8.2.2",
@@ -25,7 +26,6 @@
     "gas-webpack-plugin": "^2.0.0",
     "typescript": "^4.2.3",
     "webpack": "^5.25.0",
-    "webpack-cli": "^4.5.0",
-    "@gaskunk/core": "^0.1.2"
+    "webpack-cli": "^4.5.0"
   }
 }

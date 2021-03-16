@@ -1,6 +1,6 @@
 {
   "name": "@gaskunk/core",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "core of gaskunk",
   "author": "did0es <hollyflatpair@outlook.jp> (https://did0es.me/)",
   "homepage": "https://github.com/shuta13/gaskunk#readme",
@@ -28,8 +28,8 @@
   },
   "gitHead": "ee7a208fecf819815a21f79fbbb5ea0f3b74e9e6",
   "dependencies": {
-    "@gaskunk/error": "^0.1.2",
-    "@gaskunk/logger": "^0.1.3",
-    "@gaskunk/types": "^0.1.2"
+    "@gaskunk/error": "0.1.4",
+    "@gaskunk/logger": "0.1.4",
+    "@gaskunk/types": "0.1.4"
   }
 }
