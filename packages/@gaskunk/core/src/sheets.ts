@@ -69,7 +69,7 @@ export const getSheets = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
     return [colunmNames, initialValues];
   };
 
-  const findAll = (args: FindAllArgs) => {
+  const find = (args: FindAllArgs) => {
     const { tableName } = args;
     const target = sheets?.getSheetByName(tableName);
     const range = target?.getDataRange();
@@ -95,7 +95,7 @@ export const getSheets = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
 
   const findBy = (_args: FindByArgs) => {};
 
-  const deleteAll = (args: DeleteAllArgs) => {
+  const destroy = (args: DeleteAllArgs) => {
     const { tableName } = args;
     const target = sheets.getSheetByName(tableName);
     const result = target?.clearContents();
@@ -111,9 +111,9 @@ export const getSheets = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
 
   return {
     save: save,
-    findAll: findAll,
+    find: find,
     findBy: findBy,
-    deleteAll: deleteAll,
+    destroy: destroy,
     deleteBy: deleteBy,
     order: order,
     update: update,

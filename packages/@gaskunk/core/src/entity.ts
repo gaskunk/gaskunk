@@ -15,24 +15,24 @@ export class Entity {
     );
   }
 
-  public findAll() {
+  public find() {
     /**
      * Get all data in table
      */
     const tableName = this.constructor.name;
-    return this.sheets && getSheets(this.sheets).findAll({ tableName });
+    return this.sheets && getSheets(this.sheets).find({ tableName });
   }
 
   public findBy() {
     // TODO: Get data by params
   }
 
-  public deleteAll() {
+  public destroy() {
     /**
      * Delete all data in table
      */
     const tableName = this.constructor.name;
-    return this.sheets && getSheets(this.sheets).deleteAll({ tableName });
+    return this.sheets && getSheets(this.sheets).destroy({ tableName });
   }
 
   public deleteBy() {

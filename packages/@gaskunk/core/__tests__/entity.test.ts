@@ -42,13 +42,13 @@ describe('Entity', () => {
     expect(skunk.save()).toEqual([SHEETS_VALUES[0], SHEETS_VALUES[1]]);
   });
 
-  it('delete all', () => {
+  it('destroy', () => {
     const skunk = new Skunk();
-    expect(skunk.deleteAll()).toBe(`Deleted ${skunk.constructor.name} data`);
+    expect(skunk.destroy()).toBe(`Deleted ${skunk.constructor.name} data`);
   });
 
-  it('find all', () => {
+  it('find', () => {
     const skunk = new Skunk();
-    expect(skunk.findAll()).toEqual(SHEETS_VALUES);
+    expect(skunk.find()).toEqual(SHEETS_VALUES);
   });
 });
