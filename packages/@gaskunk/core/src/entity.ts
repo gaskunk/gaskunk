@@ -61,7 +61,10 @@ export class Entity {
   }
 
   // TODO: Get id by values
-  public getId() {}
+  public getId(entity: Entity) {
+    const tableName = this.constructor.name;
+    return this.sheets && getData(this.sheets).getId({ tableName, entity });
+  }
 
   // TODO: Merge multiple table
   public merge() {}

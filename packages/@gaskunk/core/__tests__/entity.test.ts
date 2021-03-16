@@ -92,6 +92,14 @@ describe('Data', () => {
     expect(skunk.hasId(skunk)).toBe(true);
   });
 
+  it('getId', () => {
+    const skunk = new Skunk();
+    skunk.id = 0;
+    skunk.name = 'gaskunk';
+    skunk.description = '🦨';
+    expect(skunk.getId(skunk)).toBe(0);
+  });
+
   it('methods', () => {
     const skunk = new Skunk();
     expect(

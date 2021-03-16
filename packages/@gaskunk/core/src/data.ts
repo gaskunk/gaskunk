@@ -16,6 +16,23 @@ import { DataLogger } from '@gaskunk/logger';
 import { transpile } from 'typescript';
 import { Entity } from './entity';
 
+/**
+ * Compare array
+ */
+const hasContravariance = (superArray: any[], subArray: any[]) => {
+  return (
+    superArray.length >= subArray.length &&
+    superArray.every((elem, index) => elem === subArray[index])
+  );
+};
+
+const getEntityProperties = (entity: Entity) => {
+  const properties = Object.entries(entity).filter(
+    (value) => !value.includes('sheets')
+  );
+  return properties.map((property) => property[1]);
+};
+
 export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
   const logger = new DataLogger();
 
@@ -63,38 +80,39 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
     const range = target?.getDataRange();
     const spreadsheetValues = range?.getValues();
 
-    /**
-     * Array of entity properties
-     */
-    const properties = Object.entries(entity).filter(
-      (value) => !value.includes('sheets')
-    );
-    const entityValues = properties.map((property) => property[1]);
-
-    /**
-     * Compare row values of Spreadsheet, entity values
-     */
-    const hasContravariance = (superArray: any[], subArray: any[]) => {
-      return (
-        superArray.length >= subArray.length &&
-        superArray.every((elem, index) => elem === subArray[index])
-      );
-    };
+    const entityProperties = getEntityProperties(entity);
 
     const foundValues = spreadsheetValues?.filter((value) =>
-      hasContravariance(value, entityValues)
+      hasContravariance(value, entityProperties)
     );
 
     if (!foundValues) return false;
 
     /**
-     * foundValues[0]: primaryColumn value
+     * foundValues[0][0]: primaryColumn value
      */
-    if (foundValues[0] != null) return true;
+    if (foundValues[0][0] != null) return true;
     else return false;
   };
 
-  const getId = (_args: GetIdArgs) => {};
+  const getId = (args: GetIdArgs<Entity>) => {
+    const { tableName, entity } = args;
+    const target = sheets.getSheetByName(tableName);
+    const range = target?.getDataRange();
+    const spreadsheetValues = range?.getValues();
+
+    const entityProperties = getEntityProperties(entity);
+
+    const foundValues = spreadsheetValues?.filter((value) =>
+      hasContravariance(value, entityProperties)
+    );
+
+    /**
+     * foundValues[0][0]: primaryColumn value
+     */
+    if (!foundValues) return undefined;
+    return foundValues[0][0];
+  };
 
   const merge = (_args: MergeArgs) => {};
 

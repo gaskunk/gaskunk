@@ -30,7 +30,9 @@ export interface HasIdArgs<T> extends Base {
   entity: T;
 }
 
-export interface GetIdArgs extends Base {}
+export interface GetIdArgs<T> extends Base {
+  entity: T;
+}
 
 export interface MergeArgs extends Base {}
 
