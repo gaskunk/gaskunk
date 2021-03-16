@@ -2,6 +2,10 @@
   "version": "0.1.3",
   "npmClient": "yarn",
   "command": {
+    "version": {
+      "exact": true,
+      "conventionalCommits": true
+    },
     "publish": {
       "npmClient": "npm",
       "registry": "https://registry.npmjs.org/",

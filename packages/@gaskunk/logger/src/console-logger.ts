@@ -15,4 +15,6 @@ export class ConsoleLogger implements Logger {
         console.warn('[WARN]: ' + message);
     }
   }
+
+  logGet() {}
 }

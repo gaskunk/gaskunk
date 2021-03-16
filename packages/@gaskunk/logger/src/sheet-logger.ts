@@ -1,6 +1,8 @@
-import { MethodName } from './logger';
+import { Logger, MethodName } from './logger';
 
-export class SheetLogger {
+export class SheetLogger implements Logger {
+  log() {}
+
   logGet(tableName: string, methodName: MethodName) {
     switch (methodName) {
       case 'create':

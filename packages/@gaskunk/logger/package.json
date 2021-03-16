@@ -26,6 +26,6 @@
     "url": "https://github.com/shuta13/gaskunk/issues"
   },
   "dependencies": {
-    "@gaskunk/core": "0.1.2"
+    "@gaskunk/core": "0.1.3"
   }
 }
