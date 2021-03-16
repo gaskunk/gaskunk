@@ -2,25 +2,29 @@
   "name": "@gaskunk/core",
   "version": "0.1.2",
   "description": "core of gaskunk",
-  "bugs": {
-    "url": "https://github.com/shuta13/gaskunk/issues"
-  },
+  "author": "did0es <hollyflatpair@outlook.jp> (https://did0es.me/)",
   "homepage": "https://github.com/shuta13/gaskunk#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/shuta13/gaskunk/tree/main/packages/@gaskunk/core",
     "directory": "packages/@gaskunk/core"
   },
-  "license": "MIT",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest"
   },
-  "publishConfig": {
-    "access": "public"
+  "bugs": {
+    "url": "https://github.com/shuta13/gaskunk/issues"
   },
   "gitHead": "ee7a208fecf819815a21f79fbbb5ea0f3b74e9e6",
   "dependencies": {
