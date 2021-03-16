@@ -27,5 +27,6 @@
   },
   "dependencies": {
     "@gaskunk/core": "0.1.4"
-  }
+  },
+  "gitHead": "8929dc41d6e4ccea5983f70fe270e35d2438fc72"
 }
