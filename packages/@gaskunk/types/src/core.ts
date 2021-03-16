@@ -38,7 +38,9 @@ export interface MergeArgs extends Base {}
 
 export interface InsertArgs extends Base {}
 
-export interface CountArgs extends Base {}
+export interface CountArgs<T extends object = {}> extends Base {
+  entity: { [key: string]: string | number | boolean | null | undefined | T };
+}
 
 export interface MethodsArgs extends Base {
   methods: string;

@@ -122,7 +122,14 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
 
   const insert = (_args: InsertArgs) => {};
 
-  const count = (_args: CountArgs) => {};
+  const count = (args: CountArgs) => {
+    const { tableName, entity } = args;
+    const target = sheets.getSheetByName(tableName);
+    const range = target?.getDataRange();
+    const spreadsheetValues = range?.getValues();
+
+    // [....].filter(x => x==2).length
+  };
 
   const methods = (args: MethodsArgs) => {
     const { methods } = args;
