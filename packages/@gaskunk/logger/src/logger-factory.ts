@@ -1,18 +1,18 @@
 import { DataLogger } from './data-logger';
-import { HighLightConsoleLogger } from './highlight-console-logger';
+import { ConsoleLogger } from './console-logger';
 import { SheetLogger } from './sheet-logger';
 
 export class LoggerFactory {
-  create(logger?: 'data' | 'sheet', options?: any) {
+  create(logger?: 'data' | 'sheet') {
     if (logger) {
       switch (logger) {
         case 'data':
-          return new DataLogger(options);
+          return new DataLogger();
         case 'sheet':
-          return new SheetLogger(options);
+          return new SheetLogger();
       }
     }
 
-    return new HighLightConsoleLogger(options);
+    return new ConsoleLogger();
   }
 }

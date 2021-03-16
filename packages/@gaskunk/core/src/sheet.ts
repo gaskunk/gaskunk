@@ -13,7 +13,7 @@ export const getSheet = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
     create({ tableName });
 
     /**
-     * FIXME: Get sub class properties
+     * Get sub class properties
      */
     const values = properties.filter(
       (property) => !property.includes('sheets')

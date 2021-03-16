@@ -2,9 +2,7 @@ import { getData } from './data';
 import { getSheet } from './sheet';
 
 export class Entity {
-  private sheets: GoogleAppsScript.Spreadsheet.Spreadsheet | null = null;
-
-  constructor(sheets?: GoogleAppsScript.Spreadsheet.Spreadsheet) {
+  constructor(private sheets?: GoogleAppsScript.Spreadsheet.Spreadsheet) {
     this.sheets = sheets || SpreadsheetApp.getActive();
   }
 

@@ -1,11 +1,7 @@
-export interface Logger<T extends object | string = {}> {
-  log(level: 'log' | 'info' | 'warn', message: T): any;
+import type { Entity } from '@gaskunk/core';
+
+export interface Logger {
+  log(level: 'log' | 'info' | 'warn', message: any): any;
 }
 
-export type LoggerOptions =
-  | boolean
-  | 'data'
-  | 'sheet'
-  | 'warn'
-  | 'info'
-  | 'log';
+export type MethodName = keyof Entity;

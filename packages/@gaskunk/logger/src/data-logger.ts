@@ -1,7 +1,5 @@
-import { Logger, LoggerOptions } from './logger';
+import { MethodName } from './logger';
 
-export class DataLogger implements Logger {
-  constructor(private options: LoggerOptions) {}
-
-  log() {}
+export class DataLogger {
+  logGet(_tableName: string, _methodName: MethodName) {}
 }
