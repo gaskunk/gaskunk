@@ -1,6 +1,6 @@
 {
   "name": "@gaskunk/logger",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "logger of gaskunk",
   "author": "did0es <hollyflatpair@outlook.jp> (https://did0es.me/)",
   "homepage": "https://github.com/shuta13/gaskunk#readme",
@@ -26,7 +26,7 @@
     "url": "https://github.com/shuta13/gaskunk/issues"
   },
   "dependencies": {
-    "@gaskunk/core": "0.1.4"
+    "@gaskunk/core": "0.1.5"
   },
   "gitHead": "b73747890389d6e7cbf7483bf352ff4b33b1519c"
 }
