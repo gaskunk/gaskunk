@@ -2,6 +2,6 @@
 
 🚧 Under Construction 🚧
 
-"gaskunk" - Node Package, Mapper for Google Apps Script + Google Sheets with clasp.
+"gaskunk" - Mapper for Google Apps Script + Spreadsheet
 
 ### API
