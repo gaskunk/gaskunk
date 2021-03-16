@@ -10,6 +10,7 @@ import type {
   SaveArgs,
   UpdateArgs,
 } from '@gaskunk/types';
+import { CannotClearError, CannotDeleteAllError } from '@gaskunk/error';
 
 export const getTable = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
   const create = (args: CreateArgs) => {
@@ -25,8 +26,7 @@ export const getTable = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
       sheets?.deleteSheet(target);
       return `Cleared ${tableName}`;
     }
-    // FIXME: @gaskunk/error
-    return new Error(`Cannot clear ${tableName}`);
+    return new CannotClearError(tableName);
   };
 
   return {
@@ -100,8 +100,7 @@ export const getSheets = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
     const target = sheets.getSheetByName(tableName);
     const result = target?.clearContents();
     if (result) return `Deleted ${tableName} data`;
-    // FIXME: @gaskunk/error
-    return new Error(`Cannot deleted ${tableName} data`);
+    return new CannotDeleteAllError(tableName);
   };
 
   const deleteBy = (_args: DeleteByArgs) => {};

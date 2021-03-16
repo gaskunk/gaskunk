@@ -23,11 +23,8 @@
     "access": "public"
   },
   "gitHead": "ee7a208fecf819815a21f79fbbb5ea0f3b74e9e6",
-  "devDependencies": {
-    "@gaskunk/types": "^0.1.0",
-    "axios": "^0.21.1"
-  },
   "dependencies": {
-    "@gaskunk/types": "0.1.2"
+    "@gaskunk/error": "^0.1.2",
+    "@gaskunk/types": "^0.1.2"
   }
 }
