@@ -26,5 +26,8 @@
   "devDependencies": {
     "@gaskunk/types": "^0.1.0",
     "axios": "^0.21.1"
+  },
+  "dependencies": {
+    "@gaskunk/types": "0.1.1"
   }
 }
