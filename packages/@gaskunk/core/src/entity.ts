@@ -1,4 +1,5 @@
-import { getSheets } from './sheets';
+import { getData } from './data';
+import { getSheet } from './sheet';
 
 export class Entity {
   private sheets: GoogleAppsScript.Spreadsheet.Spreadsheet | null = null;
@@ -7,43 +8,67 @@ export class Entity {
     this.sheets = sheets || SpreadsheetApp.getActive();
   }
 
+  /**
+   * Create new sheet as table
+   */
+  public create(tableName: string) {
+    return this.sheets && getSheet(this.sheets).create({ tableName });
+  }
+
+  /**
+   * Create entities, insert initial values
+   */
   public save() {
     const tableName = this.constructor.name;
     const properties = Object.entries(this);
-    return (
-      this.sheets && getSheets(this.sheets).save({ tableName, properties })
-    );
+    return this.sheets && getSheet(this.sheets).save({ tableName, properties });
   }
 
+  /**
+   * Delete table (drop)
+   */
+  public clear(tableName: string) {
+    return this.sheets && getSheet(this.sheets).clear({ tableName });
+  }
+
+  /**
+   * Get all values in table
+   */
   public find() {
-    /**
-     * Get all data in table
-     */
     const tableName = this.constructor.name;
-    return this.sheets && getSheets(this.sheets).find({ tableName });
+    return this.sheets && getData(this.sheets).find({ tableName });
   }
 
-  public findBy() {
-    // TODO: Get data by params
-  }
+  // TODO: Get values by params
+  public findBy() {}
 
-  public destroy() {
-    /**
-     * Delete all data in table
-     */
+  /**
+   * Delete all values in table
+   */
+  public remove() {
     const tableName = this.constructor.name;
-    return this.sheets && getSheets(this.sheets).destroy({ tableName });
+    return this.sheets && getData(this.sheets).remove({ tableName });
   }
 
-  public deleteBy() {
-    // TODO: Delete data by params
-  }
+  // TODO: Delete values by params
+  public removeBy() {}
 
-  public order() {
-    // TODO: Sort data
-  }
+  // TODO: Update values
+  public update() {}
 
-  public update() {
-    // TODO: Update data
-  }
+  // TODO: Check values by id
+  public hasId() {}
+
+  // TODO: Get id by values
+  public getId() {}
+
+  // TODO: Merge multiple table
+  public merge() {}
+
+  public insert() {}
+
+  public count() {}
+
+  // TODO: Executes raw GAS methods
+  public methods() {}
 }

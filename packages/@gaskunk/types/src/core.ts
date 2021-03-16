@@ -18,6 +18,4 @@ export interface DeleteAllArgs extends Base {}
 
 export interface DeleteByArgs extends Base {}
 
-export interface OrderArgs extends Base {}
-
 export interface UpdateArgs extends Base {}

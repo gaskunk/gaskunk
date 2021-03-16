@@ -5,6 +5,6 @@ export class CannotDeleteAllError extends Error {
   constructor(tableName: string) {
     super();
     Object.setPrototypeOf(this, CannotDeleteAllError.prototype);
-    this.message = `Cannot destroy values in ${tableName}`;
+    this.message = `Cannot remove values in ${tableName}`;
   }
 }
