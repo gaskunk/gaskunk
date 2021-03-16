@@ -6,13 +6,10 @@ import type {
   UpdateArgs,
 } from '@gaskunk/types';
 import { CannotDeleteAllError } from '@gaskunk/error';
-import { LoggerFactory } from '@gaskunk/logger';
-import { ConsoleLogger } from '@gaskunk/logger/lib/console-logger';
-import { SheetLogger } from '@gaskunk/logger/lib/sheet-logger';
+import { DataLogger } from '@gaskunk/logger';
 
 export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
-  const logger = new LoggerFactory().create('data');
-  if (logger instanceof ConsoleLogger || logger instanceof SheetLogger) return;
+  const logger = new DataLogger();
 
   const find = (args: FindAllArgs) => {
     const { tableName } = args;

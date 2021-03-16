@@ -1,7 +1,4 @@
-import { LoggerFactory } from '@gaskunk/logger';
-import { ConsoleLogger } from '@gaskunk/logger/lib/console-logger';
-import { SheetLogger } from '@gaskunk/logger/lib/sheet-logger';
-import { DataLogger } from '@gaskunk/logger/lib/data-logger';
+import { DataLogger, SheetLogger } from '@gaskunk/logger';
 import { Entity } from '../src/entity';
 
 const SHEETS_VALUES = [
@@ -43,8 +40,7 @@ class Skunk extends Entity {
 }
 
 describe('Sheet', () => {
-  const logger = new LoggerFactory().create('data');
-  if (logger instanceof ConsoleLogger || logger instanceof DataLogger) return;
+  const logger = new SheetLogger();
 
   it('create', () => {
     const skunk = new Skunk();
@@ -76,8 +72,7 @@ describe('Sheet', () => {
 });
 
 describe('Data', () => {
-  const logger = new LoggerFactory().create('data');
-  if (logger instanceof ConsoleLogger || logger instanceof SheetLogger) return;
+  const logger = new DataLogger();
 
   it('find', () => {
     const skunk = new Skunk();
