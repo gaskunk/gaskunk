@@ -17,7 +17,7 @@ import { transpile } from 'typescript';
 import { Entity } from './entity';
 
 /**
- * Compare array
+ * Check contravariant of arrays
  */
 const hasContravariance = (superArray: any[], subArray: any[]) => {
   return (
@@ -46,9 +46,11 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
      * Get first row values as column names
      */
     const columnNames = spreadsheetValues?.reduce((prev, cur, index) => {
-      if (index == 0) return cur;
+      if (index === 0) return cur;
       return prev;
     }, []);
+
+    if (!columnNames) return null;
 
     // TODO: get values excludes column names
     const values = spreadsheetValues?.filter((value) => value !== columnNames);
@@ -82,16 +84,17 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
 
     const entityProperties = getEntityProperties(entity);
 
-    const foundValues = spreadsheetValues?.filter((value) =>
-      hasContravariance(value, entityProperties)
-    );
+    const foundValues = spreadsheetValues?.reduce((prev, cur) => {
+      if (hasContravariance(cur, entityProperties)) return cur;
+      return prev;
+    }, []);
 
     if (!foundValues) return false;
 
     /**
-     * foundValues[0][0]: primaryColumn value
+     * foundValues[0]: primaryColumn value
      */
-    if (foundValues[0][0] != null) return true;
+    if (foundValues[0] != null) return true;
     else return false;
   };
 
@@ -103,15 +106,16 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
 
     const entityProperties = getEntityProperties(entity);
 
-    const foundValues = spreadsheetValues?.filter((value) =>
-      hasContravariance(value, entityProperties)
-    );
+    const foundValues = spreadsheetValues?.reduce((prev, cur) => {
+      if (hasContravariance(cur, entityProperties)) return cur;
+      return prev;
+    }, []);
 
     /**
-     * foundValues[0][0]: primaryColumn value
+     * foundValues[0]: primaryColumn value
      */
-    if (!foundValues) return undefined;
-    return foundValues[0][0];
+    if (!foundValues) return null;
+    return foundValues[0];
   };
 
   const merge = (_args: MergeArgs) => {};
