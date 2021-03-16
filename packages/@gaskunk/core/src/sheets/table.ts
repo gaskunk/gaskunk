@@ -5,12 +5,12 @@ export class Table {
     this.sheets = sheets;
   }
 
-  create(name: string) {
+  public create(name: string) {
     this.sheets?.insertSheet(name);
     return `Created ${name}`;
   }
 
-  clear(name: string) {
+  public clear(name: string) {
     const target = this.sheets?.getSheetByName(name);
     if (target) {
       this.sheets?.deleteSheet(target);

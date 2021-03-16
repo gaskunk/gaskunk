@@ -1,10 +1,10 @@
-import { Table } from '../src/table';
+import { Table } from '../src/sheets/table';
 
 SpreadsheetApp['getActiveSpreadsheet'] = jest.fn(
   () =>
     (({
       insertSheet: jest.fn(),
-      getSheetByName: jest.fn(() => ({} as GoogleAppsScript.Spreadsheet.Sheet)),
+      getSheetByName: jest.fn(() => ({})),
       deleteSheet: jest.fn(),
     } as unknown) as GoogleAppsScript.Spreadsheet.Spreadsheet)
 );

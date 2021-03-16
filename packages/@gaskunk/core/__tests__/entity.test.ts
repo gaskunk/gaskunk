@@ -1,4 +1,4 @@
-import { Entity } from '../src/entity';
+import { Entity } from '../src/sheets/entity';
 
 const SHEETS_VALUES = [
   ['id', 'name', 'description'],
@@ -9,21 +9,14 @@ const SHEETS_VALUES = [
 SpreadsheetApp['getActive'] = jest.fn(
   () =>
     (({
-      getSheetByName: jest.fn(
-        () =>
-          (({
-            clearContents: jest.fn(
-              () => ({} as GoogleAppsScript.Spreadsheet.Sheet)
-            ),
-            appendRow: jest.fn(),
-            getDataRange: jest.fn(
-              () =>
-                (({
-                  getValues: jest.fn(() => SHEETS_VALUES),
-                } as unknown) as GoogleAppsScript.Spreadsheet.Sheet)
-            ),
-          } as unknown) as GoogleAppsScript.Spreadsheet.Sheet)
-      ),
+      insertSheet: jest.fn(),
+      getSheetByName: jest.fn(() => ({
+        clearContents: jest.fn(() => ({})),
+        appendRow: jest.fn(),
+        getDataRange: jest.fn(() => ({
+          getValues: jest.fn(() => SHEETS_VALUES),
+        })),
+      })),
     } as unknown) as GoogleAppsScript.Spreadsheet.Spreadsheet)
 );
 
@@ -51,11 +44,11 @@ describe('Entity', () => {
 
   it('delete', () => {
     const skunk = new Skunk();
-    expect(skunk.delete()).toBe(`Deleted ${skunk.constructor.name} data`);
+    expect(skunk.deleteAll()).toBe(`Deleted ${skunk.constructor.name} data`);
   });
 
   it('find', () => {
     const skunk = new Skunk();
-    expect(skunk.find()).toEqual(SHEETS_VALUES);
+    expect(skunk.findAll()).toEqual(SHEETS_VALUES);
   });
 });

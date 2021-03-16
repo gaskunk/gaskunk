@@ -1,44 +1,21 @@
-import { Table } from './table';
+import { getSheets } from './sheets';
 
 export class Entity {
   private sheets: GoogleAppsScript.Spreadsheet.Spreadsheet | null = null;
-  private table = new Table(this.sheets);
 
   constructor(sheets?: GoogleAppsScript.Spreadsheet.Spreadsheet) {
     this.sheets = sheets || SpreadsheetApp.getActive();
   }
 
-  save() {
-    /**
-     * Insert new sheet as table
-     */
+  public save() {
     const tableName = this.constructor.name;
-    this.table.create(tableName);
-
-    /**
-     * Get sub class properties
-     */
-    const entityProperties = Object.entries(this);
-    const values = entityProperties.filter(
-      (property) => !property.includes('sheets') && !property.includes('table')
+    const properties = Object.entries(this);
+    return (
+      this.sheets && getSheets(this.sheets).save({ tableName, properties })
     );
-
-    /**
-     * Insert column name
-     */
-    const colunmNames = values.map((value) => value[0]);
-    const target = this.sheets?.getSheetByName(tableName);
-    target?.appendRow(colunmNames);
-
-    /**
-     * Insert initial values
-     */
-    const initialValues = values.map((value) => value[1]);
-    target?.appendRow(initialValues);
-
-    return [colunmNames, initialValues];
   }
-  find() {
+
+  public findAll() {
     // TODO: Get all data
     const tableName = this.constructor.name;
     const target = this.sheets?.getSheetByName(tableName);
@@ -62,10 +39,12 @@ export class Entity {
 
     return [columnNames, []];
   }
-  findBy() {
+
+  public findBy() {
     // TODO: Get data by params
   }
-  delete() {
+
+  public deleteAll() {
     /**
      * Delete all data in table
      */
@@ -75,13 +54,16 @@ export class Entity {
     if (result) return `Deleted ${tableName} data`;
     return new Error(`Cannot deleted ${tableName} data`);
   }
-  deleteBy() {
+
+  public deleteBy() {
     // TODO: Delete data by params
   }
-  order() {
+
+  public order() {
     // TODO: Sort data
   }
-  update() {
+
+  public update() {
     // TODO: Update data
   }
 }
