@@ -1,25 +1,20 @@
-import dayjs from 'dayjs';
-import 'dayjs/locale/ja';
+import { Skunk } from './entity';
 import { createOutput } from '../../utils/gas-content-service/gas-content-service';
-
-dayjs.locale('ja');
-
 interface DoGetEvents extends GoogleAppsScript.Events.DoGet {
   parameter: {
-    action?: 'user';
+    action?: string;
   };
 }
 
+const skunk = new Skunk();
+skunk.id = 0;
+skunk.name = 'gaskunk';
+skunk.description = '🦨';
+skunk.save();
+
 export function doGet(e: DoGetEvents) {
-  if (e.parameter.action === 'user') {
-    const ss = SpreadsheetApp.getActiveSpreadsheet();
-    const sheet = ss.getSheetByName('User');
-    const range = sheet?.getDataRange();
-    const values = range?.getValues();
-    return createOutput({ message: 'Spreadsheet values', data: values });
+  if (e.parameter.action === 'skunk') {
+    const values = skunk.findAll();
+    return values && createOutput({ message: 'Skunk values', data: values });
   }
-  const date = dayjs().format('YYYY/MM/DD');
-  return ContentService.createTextOutput(JSON.stringify(date)).setMimeType(
-    ContentService.MimeType.JSON
-  );
 }

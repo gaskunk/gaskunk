@@ -5,7 +5,7 @@ const SRC_PATH = path.resolve(__dirname, './src');
 const DIST_PATH = path.resolve(__dirname, './dist');
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: {
     index: SRC_PATH + '/index.ts',
   },
