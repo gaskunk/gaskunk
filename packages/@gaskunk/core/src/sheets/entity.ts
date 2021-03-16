@@ -16,28 +16,11 @@ export class Entity {
   }
 
   public findAll() {
-    // TODO: Get all data
-    const tableName = this.constructor.name;
-    const target = this.sheets?.getSheetByName(tableName);
-    const range = target?.getDataRange();
-    const SpreadsheetValues = range?.getValues();
-
     /**
-     * Get first row values as column names
+     * Get all data in table
      */
-    const columnNames = SpreadsheetValues?.reduce((prev, cur, index) => {
-      if (index == 0) return cur;
-      return prev;
-    }, []);
-
-    // TODO: get values excludes column names
-    const values = SpreadsheetValues?.filter((value) => value !== columnNames);
-
-    if (values) {
-      return [columnNames, ...values];
-    }
-
-    return [columnNames, []];
+    const tableName = this.constructor.name;
+    return this.sheets && getSheets(this.sheets).findAll({ tableName });
   }
 
   public findBy() {
@@ -49,10 +32,7 @@ export class Entity {
      * Delete all data in table
      */
     const tableName = this.constructor.name;
-    const target = this.sheets?.getSheetByName(tableName);
-    const result = target?.clearContents();
-    if (result) return `Deleted ${tableName} data`;
-    return new Error(`Cannot deleted ${tableName} data`);
+    return this.sheets && getSheets(this.sheets).deleteAll({ tableName });
   }
 
   public deleteBy() {

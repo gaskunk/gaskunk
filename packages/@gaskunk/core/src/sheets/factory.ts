@@ -1,4 +1,4 @@
-import { Table } from './sheets/table';
+import { Table } from './table';
 
 export const entityContainerFactory = (
   sheets: GoogleAppsScript.Spreadsheet.Spreadsheet

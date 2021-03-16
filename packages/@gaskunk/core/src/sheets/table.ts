@@ -1,3 +1,5 @@
+import { getTable } from './sheets';
+
 export class Table {
   private sheets: GoogleAppsScript.Spreadsheet.Spreadsheet | null = null;
 
@@ -5,17 +7,11 @@ export class Table {
     this.sheets = sheets;
   }
 
-  public create(name: string) {
-    this.sheets?.insertSheet(name);
-    return `Created ${name}`;
+  public create(tableName: string) {
+    return this.sheets && getTable(this.sheets).create({ tableName });
   }
 
-  public clear(name: string) {
-    const target = this.sheets?.getSheetByName(name);
-    if (target) {
-      this.sheets?.deleteSheet(target);
-      return `Cleared ${name}`;
-    }
-    return new Error(`Cannot clear ${name}`);
+  public clear(tableName: string) {
+    return this.sheets && getTable(this.sheets).clear({ tableName });
   }
 }

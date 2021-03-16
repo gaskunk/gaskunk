@@ -1,5 +1,38 @@
-import { entityContainerFactory } from '../factory';
-import type { SaveArgs } from './types/sheets';
+import { entityContainerFactory } from './factory';
+import type {
+  ClearArgs,
+  CreateArgs,
+  DeleteAllArgs,
+  DeleteByArgs,
+  FindAllArgs,
+  FindByArgs,
+  OrderArgs,
+  SaveArgs,
+  UpdateArgs,
+} from '../types/sheets/sheets';
+
+export const getTable = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
+  const create = (args: CreateArgs) => {
+    const { tableName } = args;
+    sheets.insertSheet(tableName);
+    return `Created ${tableName}`;
+  };
+
+  const clear = (args: ClearArgs) => {
+    const { tableName } = args;
+    const target = sheets?.getSheetByName(tableName);
+    if (target) {
+      sheets?.deleteSheet(target);
+      return `Cleared ${tableName}`;
+    }
+    return new Error(`Cannot clear ${tableName}`);
+  };
+
+  return {
+    create: create,
+    clear: clear,
+  };
+};
 
 export const getSheets = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
   const container = entityContainerFactory(sheets);
@@ -35,19 +68,53 @@ export const getSheets = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
     return [colunmNames, initialValues];
   };
 
-  const find = () => {};
+  const findAll = (args: FindAllArgs) => {
+    const { tableName } = args;
+    const target = sheets?.getSheetByName(tableName);
+    const range = target?.getDataRange();
+    const SpreadsheetValues = range?.getValues();
 
-  const findBy = () => {};
+    /**
+     * Get first row values as column names
+     */
+    const columnNames = SpreadsheetValues?.reduce((prev, cur, index) => {
+      if (index == 0) return cur;
+      return prev;
+    }, []);
 
-  const deleteAll = () => {};
+    // TODO: get values excludes column names
+    const values = SpreadsheetValues?.filter((value) => value !== columnNames);
 
-  const deleteBy = () => {};
+    if (values) {
+      return [columnNames, ...values];
+    }
 
-  const order = () => {};
+    return [columnNames, []];
+  };
 
-  const update = () => {};
+  const findBy = (_args: FindByArgs) => {};
+
+  const deleteAll = (args: DeleteAllArgs) => {
+    const { tableName } = args;
+    const target = sheets.getSheetByName(tableName);
+    const result = target?.clearContents();
+    if (result) return `Deleted ${tableName} data`;
+    return new Error(`Cannot deleted ${tableName} data`);
+  };
+
+  const deleteBy = (_args: DeleteByArgs) => {};
+
+  const order = (_args: OrderArgs) => {};
+
+  const update = (_args: UpdateArgs) => {};
 
   return {
     save: save,
+    findAll: findAll,
+    findBy: findBy,
+    deleteAll: deleteAll,
+    deleteBy: deleteBy,
+    order: order,
+    update: update,
   };
 };

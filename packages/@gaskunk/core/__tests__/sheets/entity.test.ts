@@ -1,4 +1,4 @@
-import { Entity } from '../src/sheets/entity';
+import { Entity } from '../../src/sheets/entity';
 
 const SHEETS_VALUES = [
   ['id', 'name', 'description'],
@@ -42,12 +42,12 @@ describe('Entity', () => {
     expect(skunk.save()).toEqual([SHEETS_VALUES[0], SHEETS_VALUES[1]]);
   });
 
-  it('delete', () => {
+  it('delete all', () => {
     const skunk = new Skunk();
     expect(skunk.deleteAll()).toBe(`Deleted ${skunk.constructor.name} data`);
   });
 
-  it('find', () => {
+  it('find all', () => {
     const skunk = new Skunk();
     expect(skunk.findAll()).toEqual(SHEETS_VALUES);
   });
