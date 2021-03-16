@@ -1,5 +1,10 @@
 import { MethodName } from './logger';
 
 export class DataLogger {
-  logGet(_tableName: string, _methodName: MethodName) {}
+  logGet(tableName: string, methodName: MethodName) {
+    switch (methodName) {
+      case 'remove':
+        return `Removed ${tableName} values`;
+    }
+  }
 }
