@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.6](https://github.com/shuta13/gaskunk/compare/v0.1.5...v0.1.6) (2021-03-16)
+
+
+### Bug Fixes
+
+* remove factory ([2c00cc4](https://github.com/shuta13/gaskunk/commit/2c00cc4395497e971057bf25e9a360475e9b9112))
+
+
+
+
+
 ## [0.1.5](https://github.com/shuta13/gaskunk/compare/v0.1.4...v0.1.5) (2021-03-16)
 
 **Note:** Version bump only for package gaskunk

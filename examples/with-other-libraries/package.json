@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "with-other-libraries",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
@@ -18,7 +18,7 @@
     "@babel/plugin-proposal-optional-chaining": "^7.13.8",
     "@babel/preset-env": "^7.13.10",
     "@babel/preset-typescript": "^7.13.0",
-    "@gaskunk/core": "0.1.5",
+    "@gaskunk/core": "0.1.6",
     "@google/clasp": "^2.3.0",
     "@types/google-apps-script": "^1.0.27",
     "babel-loader": "^8.2.2",
