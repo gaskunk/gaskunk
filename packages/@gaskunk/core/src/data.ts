@@ -6,8 +6,14 @@ import type {
   UpdateArgs,
 } from '@gaskunk/types';
 import { CannotDeleteAllError } from '@gaskunk/error';
+import { LoggerFactory } from '@gaskunk/logger';
+import { ConsoleLogger } from '@gaskunk/logger/lib/console-logger';
+import { SheetLogger } from '@gaskunk/logger/lib/sheet-logger';
 
 export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
+  const logger = new LoggerFactory().create('data');
+  if (logger instanceof ConsoleLogger || logger instanceof SheetLogger) return;
+
   const find = (args: FindAllArgs) => {
     const { tableName } = args;
     const target = sheets?.getSheetByName(tableName);
@@ -38,7 +44,7 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
     const { tableName } = args;
     const target = sheets.getSheetByName(tableName);
     const result = target?.clearContents();
-    if (result) return `Deleted ${tableName} data`;
+    if (result) return logger.logGet(tableName, 'remove');
     return new CannotDeleteAllError(tableName);
   };
 

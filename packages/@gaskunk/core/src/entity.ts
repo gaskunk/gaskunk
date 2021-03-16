@@ -34,7 +34,7 @@ export class Entity {
    */
   public find() {
     const tableName = this.constructor.name;
-    return this.sheets && getData(this.sheets).find({ tableName });
+    return this.sheets && getData(this.sheets)?.find({ tableName });
   }
 
   // TODO: Get values by params
@@ -45,7 +45,7 @@ export class Entity {
    */
   public remove() {
     const tableName = this.constructor.name;
-    return this.sheets && getData(this.sheets).remove({ tableName });
+    return this.sheets && getData(this.sheets)?.remove({ tableName });
   }
 
   // TODO: Delete values by params

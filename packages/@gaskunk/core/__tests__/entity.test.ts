@@ -1,3 +1,7 @@
+import { LoggerFactory } from '@gaskunk/logger';
+import { ConsoleLogger } from '@gaskunk/logger/lib/console-logger';
+import { SheetLogger } from '@gaskunk/logger/lib/sheet-logger';
+import { DataLogger } from '@gaskunk/logger/lib/data-logger';
 import { Entity } from '../src/entity';
 
 const SHEETS_VALUES = [
@@ -38,11 +42,16 @@ class Skunk extends Entity {
   description!: string;
 }
 
-describe('Entity', () => {
+describe('Sheet', () => {
+  const logger = new LoggerFactory().create('data');
+  if (logger instanceof ConsoleLogger || logger instanceof DataLogger) return;
+
   it('create', () => {
     const skunk = new Skunk();
     const name = 'Table';
-    expect(skunk.create(name)).toBe(`Created ${name}`);
+    expect(skunk.create(name)).toBe(
+      logger.logGet(skunk.constructor.name, 'create')
+    );
   });
 
   it('save', () => {
@@ -60,8 +69,15 @@ describe('Entity', () => {
   it('clear', () => {
     const skunk = new Skunk();
     const name = 'Table';
-    expect(skunk.clear(name)).toBe(`Cleared ${name}`);
+    expect(skunk.clear(name)).toBe(
+      logger.logGet(skunk.constructor.name, 'clear')
+    );
   });
+});
+
+describe('Data', () => {
+  const logger = new LoggerFactory().create('data');
+  if (logger instanceof ConsoleLogger || logger instanceof SheetLogger) return;
 
   it('find', () => {
     const skunk = new Skunk();
@@ -70,6 +86,8 @@ describe('Entity', () => {
 
   it('remove', () => {
     const skunk = new Skunk();
-    expect(skunk.remove()).toBe(`Deleted ${skunk.constructor.name} data`);
+    expect(skunk.remove()).toBe(
+      logger.logGet(skunk.constructor.name, 'remove')
+    );
   });
 });
