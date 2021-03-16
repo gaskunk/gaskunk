@@ -1,6 +1,6 @@
 {
   "name": "@gaskunk/error",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "error of gaskunk",
   "bugs": {
     "url": "https://github.com/shuta13/gaskunk/issues"
@@ -12,6 +12,8 @@
     "directory": "packages/@gaskunk/error"
   },
   "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w"

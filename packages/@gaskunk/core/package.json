@@ -1,6 +1,6 @@
 {
   "name": "@gaskunk/core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "core of gaskunk",
   "bugs": {
     "url": "https://github.com/shuta13/gaskunk/issues"
@@ -12,6 +12,8 @@
     "directory": "packages/@gaskunk/core"
   },
   "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
@@ -20,5 +22,9 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "ee7a208fecf819815a21f79fbbb5ea0f3b74e9e6"
+  "gitHead": "ee7a208fecf819815a21f79fbbb5ea0f3b74e9e6",
+  "devDependencies": {
+    "@gaskunk/types": "^0.1.0",
+    "axios": "^0.21.1"
+  }
 }
