@@ -1,0 +1,19 @@
+{
+  "name": "@gaskunk/types",
+  "version": "0.1.0",
+  "description": "types of gaskunk",
+  "bugs": {
+    "url": "https://github.com/shuta13/gaskunk/issues"
+  },
+  "homepage": "https://github.com/shuta13/gaskunk#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shuta13/gaskunk/tree/main/packages/@gaskunk/types",
+    "directory": "packages/@gaskunk/types"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w"
+  }
+}

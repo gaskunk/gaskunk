@@ -1,4 +1,4 @@
-import { Entity } from '../../src/sheets/entity';
+import { Entity } from '../src/entity';
 
 const SHEETS_VALUES = [
   ['id', 'name', 'description'],

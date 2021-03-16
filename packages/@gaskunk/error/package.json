@@ -1,0 +1,19 @@
+{
+  "name": "@gaskunk/error",
+  "version": "0.1.0",
+  "description": "error of gaskunk",
+  "bugs": {
+    "url": "https://github.com/shuta13/gaskunk/issues"
+  },
+  "homepage": "https://github.com/shuta13/gaskunk#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shuta13/gaskunk/tree/main/packages/@gaskunk/error",
+    "directory": "packages/@gaskunk/error"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w"
+  }
+}

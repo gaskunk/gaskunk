@@ -1,4 +1,4 @@
-import { Table } from '../../src/sheets/table';
+import { Table } from '../src/table';
 
 SpreadsheetApp['getActiveSpreadsheet'] = jest.fn(
   () =>

@@ -9,7 +9,7 @@ import type {
   OrderArgs,
   SaveArgs,
   UpdateArgs,
-} from '../types/sheets/sheets';
+} from './types/sheets/sheets';
 
 export const getTable = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
   const create = (args: CreateArgs) => {
@@ -25,6 +25,7 @@ export const getTable = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
       sheets?.deleteSheet(target);
       return `Cleared ${tableName}`;
     }
+    // FIXME: @gaskunk/error
     return new Error(`Cannot clear ${tableName}`);
   };
 
@@ -99,6 +100,7 @@ export const getSheets = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
     const target = sheets.getSheetByName(tableName);
     const result = target?.clearContents();
     if (result) return `Deleted ${tableName} data`;
+    // FIXME: @gaskunk/error
     return new Error(`Cannot deleted ${tableName} data`);
   };
 
