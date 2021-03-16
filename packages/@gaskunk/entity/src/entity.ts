@@ -54,7 +54,6 @@ export class Entity {
     const values = SpreadsheetValues?.filter((value) => value !== columnNames);
 
     if (values) {
-      console.log([columnNames, ...values]);
       return [columnNames, ...values];
     }
 

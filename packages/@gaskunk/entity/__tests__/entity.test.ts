@@ -1,6 +1,6 @@
 import { Entity } from '../src/entity';
 
-const INIT = [
+const SHEETS_VALUES = [
   ['id', 'name', 'description'],
   [0, 'gaskunk', '🦨'],
   [1, 'skunk', 'This is Skunk!'],
@@ -19,7 +19,7 @@ SpreadsheetApp['getActive'] = jest.fn(
             getDataRange: jest.fn(
               () =>
                 (({
-                  getValues: jest.fn(() => INIT),
+                  getValues: jest.fn(() => SHEETS_VALUES),
                 } as unknown) as GoogleAppsScript.Spreadsheet.Sheet)
             ),
           } as unknown) as GoogleAppsScript.Spreadsheet.Sheet)
@@ -39,7 +39,11 @@ describe('Entity', () => {
     skunk.id = 0;
     skunk.name = 'gaskunk';
     skunk.description = '🦨';
-    expect(skunk.save()).toEqual(INIT);
+    /**
+     * Column names: SHEETS_VALUES[0]
+     * Initial values: SHEETS_VALUES[1]
+     */
+    expect(skunk.save()).toEqual([SHEETS_VALUES[0], SHEETS_VALUES[1]]);
   });
 
   it('delete', () => {
@@ -49,6 +53,6 @@ describe('Entity', () => {
 
   it('find', () => {
     const skunk = new Skunk();
-    expect(skunk.find()).toEqual(INIT);
+    expect(skunk.find()).toEqual(SHEETS_VALUES);
   });
 });
