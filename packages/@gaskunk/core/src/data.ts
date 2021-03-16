@@ -1,17 +1,24 @@
 import type {
-  DeleteAllArgs,
-  DeleteByArgs,
-  FindAllArgs,
+  RemoveArgs,
+  RemoveByArgs,
+  FindArgs,
   FindByArgs,
   UpdateArgs,
+  HasIdArgs,
+  GetIdArgs,
+  MergeArgs,
+  InsertArgs,
+  CountArgs,
+  MethodsArgs,
 } from '@gaskunk/types';
 import { CannotDeleteAllError } from '@gaskunk/error';
 import { DataLogger } from '@gaskunk/logger';
+import { transpile } from 'typescript';
 
 export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
   const logger = new DataLogger();
 
-  const find = (args: FindAllArgs) => {
+  const find = (args: FindArgs) => {
     const { tableName } = args;
     const target = sheets?.getSheetByName(tableName);
     const range = target?.getDataRange();
@@ -37,7 +44,7 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
 
   const findBy = (_args: FindByArgs) => {};
 
-  const remove = (args: DeleteAllArgs) => {
+  const remove = (args: RemoveArgs) => {
     const { tableName } = args;
     const target = sheets.getSheetByName(tableName);
     const result = target?.clearContents();
@@ -45,9 +52,26 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
     return new CannotDeleteAllError(tableName);
   };
 
-  const removeBy = (_args: DeleteByArgs) => {};
+  const removeBy = (_args: RemoveByArgs) => {};
 
   const update = (_args: UpdateArgs) => {};
+
+  const hasId = (_args: HasIdArgs) => {};
+
+  const getId = (_args: GetIdArgs) => {};
+
+  const merge = (_args: MergeArgs) => {};
+
+  const insert = (_args: InsertArgs) => {};
+
+  const count = (_args: CountArgs) => {};
+
+  const methods = (args: MethodsArgs) => {
+    const { methods } = args;
+    const code = transpile(`sheets?.${methods}`);
+    const result = eval(code);
+    return result;
+  };
 
   return {
     find: find,
@@ -55,5 +79,11 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
     remove: remove,
     removeBy: removeBy,
     update: update,
+    hasId: hasId,
+    getId: getId,
+    merge: merge,
+    insert: insert,
+    count: count,
+    methods: methods,
   };
 };

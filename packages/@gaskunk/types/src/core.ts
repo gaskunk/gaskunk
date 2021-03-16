@@ -2,20 +2,42 @@ interface Base {
   tableName: string;
 }
 
+/**
+ * Sheet args
+ */
 export interface CreateArgs extends Base {}
-
-export interface ClearArgs extends Base {}
 
 export interface SaveArgs extends Base {
   properties: [string, any][];
 }
 
-export interface FindAllArgs extends Base {}
+export interface ClearArgs extends Base {}
+
+/**
+ * Data args
+ */
+export interface FindArgs extends Base {}
 
 export interface FindByArgs extends Base {}
 
-export interface DeleteAllArgs extends Base {}
+export interface RemoveArgs extends Base {}
 
-export interface DeleteByArgs extends Base {}
+export interface RemoveByArgs extends Base {}
 
 export interface UpdateArgs extends Base {}
+
+export interface HasIdArgs extends Base {
+  id: number;
+}
+
+export interface GetIdArgs extends Base {}
+
+export interface MergeArgs extends Base {}
+
+export interface InsertArgs extends Base {}
+
+export interface CountArgs extends Base {}
+
+export interface MethodsArgs extends Base {
+  methods: string;
+}

@@ -67,6 +67,11 @@ export class Entity {
 
   public count() {}
 
-  // TODO: Executes raw GAS methods
-  public methods() {}
+  /**
+   * Executes raw GAS methods
+   */
+  public methods(methods: string) {
+    const tableName = this.constructor.name;
+    return this.sheets && getData(this.sheets).methods({ tableName, methods });
+  }
 }

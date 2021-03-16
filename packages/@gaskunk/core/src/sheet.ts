@@ -1,11 +1,14 @@
 import { CannotClearError } from '@gaskunk/error';
+import { SheetLogger } from '@gaskunk/logger';
 import type { ClearArgs, CreateArgs, SaveArgs } from '@gaskunk/types';
 
 export const getSheet = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
+  const logger = new SheetLogger();
+
   const create = (args: CreateArgs) => {
     const { tableName } = args;
     sheets.insertSheet(tableName);
-    return `Created ${tableName}`;
+    return logger.logGet(tableName, 'create');
   };
 
   const save = (args: SaveArgs) => {
@@ -40,7 +43,7 @@ export const getSheet = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
     const target = sheets?.getSheetByName(tableName);
     if (target) {
       sheets?.deleteSheet(target);
-      return `Cleared ${tableName}`;
+      return logger.logGet(tableName, 'clear');
     }
     return new CannotClearError(tableName);
   };

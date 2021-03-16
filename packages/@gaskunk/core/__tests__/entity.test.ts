@@ -44,8 +44,7 @@ describe('Sheet', () => {
 
   it('create', () => {
     const skunk = new Skunk();
-    const name = 'Table';
-    expect(skunk.create(name)).toBe(
+    expect(skunk.create(skunk.constructor.name)).toBe(
       logger.logGet(skunk.constructor.name, 'create')
     );
   });
@@ -64,8 +63,7 @@ describe('Sheet', () => {
 
   it('clear', () => {
     const skunk = new Skunk();
-    const name = 'Table';
-    expect(skunk.clear(name)).toBe(
+    expect(skunk.clear(skunk.constructor.name)).toBe(
       logger.logGet(skunk.constructor.name, 'clear')
     );
   });
@@ -84,5 +82,14 @@ describe('Data', () => {
     expect(skunk.remove()).toBe(
       logger.logGet(skunk.constructor.name, 'remove')
     );
+  });
+
+  it('methods', () => {
+    const skunk = new Skunk();
+    expect(
+      skunk.methods(
+        `getSheetByName('${skunk.constructor.name}')?.getDataRange()?.getValues()`
+      )
+    ).toBe(SHEETS_VALUES);
   });
 });
