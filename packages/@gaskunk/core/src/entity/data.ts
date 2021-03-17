@@ -14,46 +14,27 @@ import type {
 import { CannotDeleteAllError } from '@gaskunk/error';
 import { DataLogger } from '@gaskunk/logger';
 import { transpile } from 'typescript';
-import { Entity } from './entity';
-
-/**
- * Check contravariance of arrays
- */
-const existsEntityInTable = (table: any[], entity: any[]) => {
-  return (
-    table.length >= entity.length &&
-    table.every((value, index) => value === entity[index])
-  );
-};
-
-const getEntityProperties = (entity: Entity) => {
-  const properties = Object.entries(entity).filter(
-    (value) => !value.includes('sheets')
-  );
-  return properties.map((property) => property[1]);
-};
+import type { Entity } from './entity';
+import {
+  findValuesWithEntity,
+  getAllSheetValues,
+  getColumnNames,
+  getEntityProperties,
+} from '../manager';
 
 export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
   const logger = new DataLogger();
 
   const find = (args: FindArgs) => {
     const { tableName } = args;
-    const target = sheets?.getSheetByName(tableName);
-    const range = target?.getDataRange();
-    const spreadsheetValues = range?.getValues();
 
-    /**
-     * Get first row values as column names
-     */
-    const columnNames = spreadsheetValues?.reduce((prev, cur, index) => {
-      if (index === 0) return cur;
-      return prev;
-    }, []);
+    const allSheetValues = getAllSheetValues(tableName, sheets);
+    const columnNames = getColumnNames(allSheetValues);
 
     if (!columnNames) return null;
 
     // TODO: get values excludes column names
-    const values = spreadsheetValues?.filter((value) => value !== columnNames);
+    const values = allSheetValues?.filter((value) => value !== columnNames);
 
     if (values) {
       return [columnNames, ...values];
@@ -66,8 +47,10 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
 
   const remove = (args: RemoveArgs) => {
     const { tableName } = args;
+
     const target = sheets.getSheetByName(tableName);
     const result = target?.clearContents();
+
     if (result) return logger.logGet(tableName, 'remove');
     return new CannotDeleteAllError(tableName);
   };
@@ -78,16 +61,10 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
 
   const hasId = (args: HasIdArgs<Entity>) => {
     const { tableName, entity } = args;
-    const target = sheets.getSheetByName(tableName);
-    const range = target?.getDataRange();
-    const spreadsheetValues = range?.getValues();
 
+    const allSheetValues = getAllSheetValues(tableName, sheets);
     const entityProperties = getEntityProperties(entity);
-
-    const foundValues = spreadsheetValues?.reduce((prev, cur) => {
-      if (existsEntityInTable(cur, entityProperties)) return cur;
-      return prev;
-    }, []);
+    const foundValues = findValuesWithEntity(allSheetValues, entityProperties);
 
     if (!foundValues) return false;
 
@@ -100,16 +77,10 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
 
   const getId = (args: GetIdArgs<Entity>) => {
     const { tableName, entity } = args;
-    const target = sheets.getSheetByName(tableName);
-    const range = target?.getDataRange();
-    const spreadsheetValues = range?.getValues();
 
+    const allSheetValues = getAllSheetValues(tableName, sheets);
     const entityProperties = getEntityProperties(entity);
-
-    const foundValues = spreadsheetValues?.reduce((prev, cur) => {
-      if (existsEntityInTable(cur, entityProperties)) return cur;
-      return prev;
-    }, []);
+    const foundValues = findValuesWithEntity(allSheetValues, entityProperties);
 
     /**
      * foundValues[0]: primaryColumn value
@@ -124,17 +95,23 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
 
   const count = (args: CountArgs) => {
     const { tableName, entity } = args;
-    const target = sheets.getSheetByName(tableName);
-    const range = target?.getDataRange();
-    const spreadsheetValues = range?.getValues();
 
+    const allSheetValues = getAllSheetValues(tableName, sheets);
+
+    console.log({ allSheetValues });
+
+    const columnNames = getColumnNames(allSheetValues);
+    const entityKeys = Object.keys(entity);
+    const entityValues = Object.values(entity);
     // [....].filter(x => x==2).length
   };
 
   const methods = (args: MethodsArgs) => {
     const { methods } = args;
+
     const code = transpile(`sheets?.${methods}`);
     const result = eval(code);
+
     return result;
   };
 

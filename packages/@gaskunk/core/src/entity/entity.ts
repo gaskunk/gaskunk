@@ -71,7 +71,10 @@ export class Entity {
 
   public insert() {}
 
-  public count() {}
+  public count(entity: { [key: string]: any }) {
+    const tableName = this.constructor.name;
+    return this.sheets && getData(this.sheets).count({ tableName, entity });
+  }
 
   /**
    * Executes raw GAS methods

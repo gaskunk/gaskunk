@@ -1,5 +1,5 @@
 import { DataLogger, SheetLogger } from '@gaskunk/logger';
-import { Entity } from '../src/entity';
+import { Entity } from '../src/entity/entity';
 
 const SHEETS_VALUES = [
   ['id', 'name', 'description'],
@@ -98,6 +98,14 @@ describe('Data', () => {
     skunk.name = 'gaskunk';
     skunk.description = '🦨';
     expect(skunk.getId(skunk)).toBe(0);
+  });
+
+  it('count', () => {
+    const skunk = new Skunk();
+    skunk.id = 0;
+    skunk.name = 'gaskunk';
+    skunk.description = '🦨';
+    expect(skunk.count(skunk)).toBe(1);
   });
 
   it('methods', () => {
