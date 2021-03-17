@@ -19,10 +19,10 @@ import { Entity } from './entity';
 /**
  * Check contravariance of arrays
  */
-const hasContravariance = (superArray: any[], subArray: any[]) => {
+const existEntityInTable = (table: any[], entity: any[]) => {
   return (
-    superArray.length >= subArray.length &&
-    superArray.every((elem, index) => elem === subArray[index])
+    table.length >= entity.length &&
+    table.every((value, index) => value === entity[index])
   );
 };
 
@@ -85,7 +85,7 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
     const entityProperties = getEntityProperties(entity);
 
     const foundValues = spreadsheetValues?.reduce((prev, cur) => {
-      if (hasContravariance(cur, entityProperties)) return cur;
+      if (existEntityInTable(cur, entityProperties)) return cur;
       return prev;
     }, []);
 
@@ -107,7 +107,7 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
     const entityProperties = getEntityProperties(entity);
 
     const foundValues = spreadsheetValues?.reduce((prev, cur) => {
-      if (hasContravariance(cur, entityProperties)) return cur;
+      if (existEntityInTable(cur, entityProperties)) return cur;
       return prev;
     }, []);
 
