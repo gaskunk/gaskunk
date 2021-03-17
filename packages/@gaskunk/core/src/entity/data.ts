@@ -95,14 +95,15 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
 
   const count = (args: CountArgs) => {
     const { tableName, entity } = args;
+    delete entity.sheets;
 
-    const allSheetValues = getAllSheetValues(tableName, sheets);
+    // const entityKeys = Object.keys(entity);
+    // const entityValues = Object.values(entity);
+    // const allSheetValues = getAllSheetValues(tableName, sheets);
+    // const columnNames = getColumnNames(allSheetValues);
 
-    console.log({ allSheetValues });
+    // console.log(columnNames);
 
-    const columnNames = getColumnNames(allSheetValues);
-    const entityKeys = Object.keys(entity);
-    const entityValues = Object.values(entity);
     // [....].filter(x => x==2).length
   };
 
