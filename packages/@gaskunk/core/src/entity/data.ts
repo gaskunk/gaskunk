@@ -12,7 +12,7 @@ import type {
   MethodsArgs,
 } from '@gaskunk/types';
 import { CannotDeleteAllError } from '@gaskunk/error';
-import { DataLogger } from '@gaskunk/logger';
+import { DataLogger, ConsoleLogger } from '@gaskunk/logger';
 import { transpile } from 'typescript';
 import type { Entity } from './entity';
 import {
@@ -20,10 +20,13 @@ import {
   getAllSheetValues,
   getColumnNames,
   getEntityProperties,
+  getAllTableValues,
+  existsEntitySome,
 } from '../manager';
 
 export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
-  const logger = new DataLogger();
+  const dataLogger = new DataLogger();
+  const consoleLogger = new ConsoleLogger();
 
   const find = (args: FindArgs) => {
     const { tableName } = args;
@@ -33,11 +36,11 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
 
     if (!columnNames) return null;
 
-    // TODO: get values excludes column names
-    const values = allSheetValues?.filter((value) => value !== columnNames);
+    const allTableValues =
+      allSheetValues && getAllTableValues(allSheetValues, columnNames);
 
-    if (values) {
-      return [columnNames, ...values];
+    if (allTableValues) {
+      return [columnNames, ...allTableValues];
     }
 
     return [columnNames, []];
@@ -51,7 +54,7 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
     const target = sheets.getSheetByName(tableName);
     const result = target?.clearContents();
 
-    if (result) return logger.logGet(tableName, 'remove');
+    if (result) return dataLogger.logGet(tableName, 'remove');
     return new CannotDeleteAllError(tableName);
   };
 
@@ -59,7 +62,13 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
 
   const update = (_args: UpdateArgs) => {};
 
+  const merge = (_args: MergeArgs) => {};
+
+  const insert = (_args: InsertArgs) => {};
+
   const hasId = (args: HasIdArgs<Entity>) => {
+    consoleLogger.log('warn', 'This is experimental API');
+
     const { tableName, entity } = args;
 
     const allSheetValues = getAllSheetValues(tableName, sheets);
@@ -76,6 +85,8 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
   };
 
   const getId = (args: GetIdArgs<Entity>) => {
+    consoleLogger.log('warn', 'This is experimental API');
+
     const { tableName, entity } = args;
 
     const allSheetValues = getAllSheetValues(tableName, sheets);
@@ -89,22 +100,22 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
     return foundValues[0];
   };
 
-  const merge = (_args: MergeArgs) => {};
-
-  const insert = (_args: InsertArgs) => {};
-
   const count = (args: CountArgs) => {
+    consoleLogger.log('warn', 'This is experimental API');
+
     const { tableName, entity } = args;
     delete entity.sheets;
 
-    // const entityKeys = Object.keys(entity);
-    // const entityValues = Object.values(entity);
-    // const allSheetValues = getAllSheetValues(tableName, sheets);
-    // const columnNames = getColumnNames(allSheetValues);
+    const allSheetValues = getAllSheetValues(tableName, sheets);
+    const columnNames = getColumnNames(allSheetValues);
+    const allTableValues =
+      allSheetValues &&
+      columnNames &&
+      getAllTableValues(allSheetValues, columnNames);
 
-    // console.log(columnNames);
-
-    // [....].filter(x => x==2).length
+    return allTableValues?.filter((allTableValue) =>
+      existsEntitySome(allTableValue, Object.values(entity))
+    ).length;
   };
 
   const methods = (args: MethodsArgs) => {

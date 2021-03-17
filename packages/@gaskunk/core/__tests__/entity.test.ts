@@ -1,6 +1,10 @@
 import { DataLogger, SheetLogger } from '@gaskunk/logger';
 import { Entity } from '../src/entity/entity';
 
+/**
+ * Column names: SHEETS_VALUES[0]
+ * Initial values: SHEETS_VALUES[1]
+ */
 const SHEETS_VALUES = [
   ['id', 'name', 'description'],
   [0, 'gaskunk', '🦨'],
@@ -54,10 +58,6 @@ describe('Sheet', () => {
     skunk.id = 0;
     skunk.name = 'gaskunk';
     skunk.description = '🦨';
-    /**
-     * Column names: SHEETS_VALUES[0]
-     * Initial values: SHEETS_VALUES[1]
-     */
     expect(skunk.save()).toEqual([SHEETS_VALUES[0], SHEETS_VALUES[1]]);
   });
 
@@ -89,6 +89,7 @@ describe('Data', () => {
     skunk.id = 0;
     skunk.name = 'gaskunk';
     skunk.description = '🦨';
+    skunk.save();
     expect(skunk.hasId(skunk)).toBe(true);
   });
 
@@ -97,6 +98,7 @@ describe('Data', () => {
     skunk.id = 0;
     skunk.name = 'gaskunk';
     skunk.description = '🦨';
+    skunk.save();
     expect(skunk.getId(skunk)).toBe(0);
   });
 
@@ -105,7 +107,11 @@ describe('Data', () => {
     skunk.id = 0;
     skunk.name = 'gaskunk';
     skunk.description = '🦨';
-    expect(skunk.count(skunk)).toBe(1);
+    skunk.save();
+    expect(skunk.count({ name: 'gaskunk' })).toBe(1);
+    expect(skunk.count({ id: 0 })).toBe(1);
+    expect(skunk.count({ age: 5 })).toBe(0);
+    // expect(skunk.count({ id: 0, name: 'gaskunk' })).toBe(1);
   });
 
   it('methods', () => {

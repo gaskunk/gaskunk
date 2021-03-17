@@ -54,6 +54,11 @@ export class Entity {
   // TODO: Update values
   public update() {}
 
+  // TODO: Merge multiple table
+  public merge() {}
+
+  public insert() {}
+
   // TODO: Check values by id
   public hasId(entity: Entity) {
     const tableName = this.constructor.name;
@@ -66,11 +71,9 @@ export class Entity {
     return this.sheets && getData(this.sheets).getId({ tableName, entity });
   }
 
-  // TODO: Merge multiple table
-  public merge() {}
-
-  public insert() {}
-
+  /**
+   * TODO: Counts with multiple entities
+   */
   public count(entity: { [key: string]: any }) {
     const tableName = this.constructor.name;
     return this.sheets && getData(this.sheets).count({ tableName, entity });
