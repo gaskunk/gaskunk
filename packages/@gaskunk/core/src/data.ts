@@ -19,7 +19,7 @@ import { Entity } from './entity';
 /**
  * Check contravariance of arrays
  */
-const existEntityInTable = (table: any[], entity: any[]) => {
+const existsEntityInTable = (table: any[], entity: any[]) => {
   return (
     table.length >= entity.length &&
     table.every((value, index) => value === entity[index])
@@ -85,7 +85,7 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
     const entityProperties = getEntityProperties(entity);
 
     const foundValues = spreadsheetValues?.reduce((prev, cur) => {
-      if (existEntityInTable(cur, entityProperties)) return cur;
+      if (existsEntityInTable(cur, entityProperties)) return cur;
       return prev;
     }, []);
 
@@ -107,7 +107,7 @@ export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
     const entityProperties = getEntityProperties(entity);
 
     const foundValues = spreadsheetValues?.reduce((prev, cur) => {
-      if (existEntityInTable(cur, entityProperties)) return cur;
+      if (existsEntityInTable(cur, entityProperties)) return cur;
       return prev;
     }, []);
 
