@@ -5,7 +5,7 @@ const SRC_PATH = path.resolve(__dirname, './src');
 const DIST_PATH = path.resolve(__dirname, './dist');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: {
     index: SRC_PATH + '/index.ts',
   },
@@ -24,6 +24,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.ts', '.js'],
+  },
+  optimization: {
+    minimize: false,
   },
   plugins: [new GasPlugin()],
 };

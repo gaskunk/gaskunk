@@ -14,7 +14,7 @@ skunk.save();
 
 export function doGet(e: DoGetEvents) {
   if (e.parameter.action === 'skunk') {
-    const values = skunk.findAll();
+    const values = skunk.find();
     return values && createOutput({ message: 'Skunk values', data: values });
   }
 }
