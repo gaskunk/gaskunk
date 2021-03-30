@@ -18,3 +18,43 @@ export function doGet(e: DoGetEvents) {
     return values && createOutput({ message: 'Skunk values', data: values });
   }
 }
+
+// finally, like shown below
+
+// library
+function gaskunk<T>(tabName: string) {
+  return {
+    select: async (query: keyof T) => {
+      if (query) {
+        /**
+         * need typecheck
+         * equally user's interface includes type of response -> return
+         */
+        return tabName;
+      } else {
+        throw new Error(tabName);
+      }
+    },
+  };
+}
+
+// user code
+interface Gaskunk {
+  id: number; // primary
+  userName: string;
+  age: number;
+  isActive: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+(async () => {
+  try {
+    /**
+     * hope Array<Gaskunk["id"]>
+     */
+    const ids = await gaskunk<Gaskunk>('gaskunk').select('id');
+  } catch (error) {
+    throw new Error(error.message);
+  }
+})();
