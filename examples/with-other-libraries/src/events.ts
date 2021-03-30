@@ -22,7 +22,7 @@ export function doGet(e: DoGetEvents) {
 // finally, like shown below
 
 // library
-function gaskunk<T>(tabName: string) {
+const gaskunk = <T extends object>(tabName: string) => {
   return {
     select: async (query: keyof T) => {
       if (query) {
@@ -36,7 +36,7 @@ function gaskunk<T>(tabName: string) {
       }
     },
   };
-}
+};
 
 // user code
 interface Gaskunk {
