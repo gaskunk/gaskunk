@@ -1,1 +1,1 @@
-export * from './entity';
+export { gaskunk } from './builder/gaskunk';
