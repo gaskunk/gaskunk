@@ -1,7 +1,14 @@
 export class MethodBuilder {
-  constructor(private tableName = '') {}
+  public _statuments: never[];
+  constructor(private tableName = '') {
+    this._statuments = [];
+  }
+
+  column() {
+    return this;
+  }
 
   select() {
-    return this;
+    return this.column();
   }
 }

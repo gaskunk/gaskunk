@@ -7,6 +7,6 @@ describe('gaskunk - ', () => {
   });
 
   test('select', () => {
-    expect(gaskunk('foo').select()).toBeInstanceOf(MethodBuilder);
+    expect(gaskunk('foo').select()).toBe('foo');
   });
 });
