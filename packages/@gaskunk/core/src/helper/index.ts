@@ -1,5 +1,8 @@
-import type { Entity } from './entity/entity';
+import type { Entity } from '../entity/entity';
 
+/**
+ * @deprecated
+ */
 export const existsEntityEvery = (table: any[], entity: any[]) => {
   if (table.length >= entity.length) {
     return table.every((value, index) => value === entity[index]);
@@ -8,6 +11,9 @@ export const existsEntityEvery = (table: any[], entity: any[]) => {
   }
 };
 
+/**
+ * @deprecated
+ */
 export const existsEntitySome = (
   allTableValues: any[],
   entityValues: any[]
@@ -21,6 +27,9 @@ export const existsEntitySome = (
   }
 };
 
+/**
+ * @deprecated
+ */
 export const getEntityProperties = (entity: Entity) => {
   const properties = Object.entries(entity).filter(
     (value) => !value.includes('sheets')
@@ -28,6 +37,9 @@ export const getEntityProperties = (entity: Entity) => {
   return properties.map((property) => property[1]);
 };
 
+/**
+ * @deprecated
+ */
 export const getColumnNames = (values?: any[][]) => {
   return values?.reduce((prev, cur, index) => {
     if (index === 0) return cur;
@@ -35,6 +47,9 @@ export const getColumnNames = (values?: any[][]) => {
   }, []);
 };
 
+/**
+ * @deprecated
+ */
 export const findValuesWithEntity = (values?: any[][], entity?: any[]) => {
   return (
     entity &&
@@ -45,6 +60,9 @@ export const findValuesWithEntity = (values?: any[][], entity?: any[]) => {
   );
 };
 
+/**
+ * @deprecated
+ */
 export const getAllSheetValues = (
   tableName: string,
   sheets?: GoogleAppsScript.Spreadsheet.Spreadsheet
@@ -52,6 +70,9 @@ export const getAllSheetValues = (
   return sheets?.getSheetByName(tableName)?.getDataRange().getValues();
 };
 
+/**
+ * @deprecated
+ */
 export const getAllTableValues = (
   allSheetValues: any[][],
   columnNames: any[]

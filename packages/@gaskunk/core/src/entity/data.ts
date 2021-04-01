@@ -22,7 +22,7 @@ import {
   getEntityProperties,
   getAllTableValues,
   existsEntitySome,
-} from '../manager';
+} from '../helper';
 
 export const getData = (sheets: GoogleAppsScript.Spreadsheet.Spreadsheet) => {
   const dataLogger = new DataLogger();

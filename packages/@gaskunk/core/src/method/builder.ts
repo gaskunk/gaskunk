@@ -1,3 +1,5 @@
+// write logic, and pass to compiler
+
 export class MethodBuilder {
   public _statuments: never[];
   constructor(private tableName = '') {
