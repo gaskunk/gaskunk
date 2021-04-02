@@ -4,12 +4,12 @@
 
 "gaskunk" - Method Chain Builder for Google Apps Script
 
+## Usage
+
 ## dialects
 
 ### spreadsheet
 
 ### document
-
-## Usage
 
 ## API
