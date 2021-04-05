@@ -1,5 +1,7 @@
 import type { Entity } from '../entity/entity';
 
+export const normalizeArray = () => {};
+
 /**
  * @deprecated
  */

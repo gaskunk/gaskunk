@@ -1,4 +1,9 @@
-import * as GASContentService from '../../utils/gas-content-service';
+export const createOutput = <T extends object>(args: any) => {
+  const { message, data } = args;
+  return ContentService.createTextOutput(
+    JSON.stringify({ status: 200, message: message, data: data })
+  ).setMimeType(ContentService.MimeType.JSON);
+};
 
 interface DoGetEvents extends GoogleAppsScript.Events.DoGet {
   parameter: {
@@ -12,16 +17,17 @@ export function doGet(e: DoGetEvents) {
   const { ping } = e.parameter;
 
   if (ping) {
-    return GASContentService.createOutput({ message: ping });
+    const values = SpreadsheetApp.getActiveSheet().getRange(1, 1).getValues();
+    return createOutput({ message: ping, data: values });
   }
-  return GASContentService.createOutput({ message: 'invalid get request' });
+  return createOutput({ message: 'invalid get request' });
 }
 
 export function doPost(e: DoPostEvents) {
   if (e.postData) {
-    return GASContentService.createOutput({
+    return createOutput({
       message: JSON.parse(e.postData.contents),
     });
   }
-  return GASContentService.createOutput({ message: 'invalid post request' });
+  return createOutput({ message: 'invalid post request' });
 }

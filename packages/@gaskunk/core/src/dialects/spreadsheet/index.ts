@@ -1,1 +1,1 @@
-// extends builder & method for spreadsheet
+export { SpreadsheetMethodBuilder } from './method/builder';
