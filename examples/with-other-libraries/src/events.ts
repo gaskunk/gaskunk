@@ -15,7 +15,10 @@ interface DoGetEvents extends GoogleAppsScript.Events.DoGet {
 export function doGet(e: DoGetEvents) {
   if (e.parameter.action === 'skunk') {
     // const values = skunk.find();
-    const values = SpreadsheetApp.getActiveSheet().getRange(1, 1).getValues();
+    const values = SpreadsheetApp.getActiveSpreadsheet()
+      .getSheets()[0]
+      .getRange(1, 1)
+      .getValues();
     return values && createOutput({ message: 'Skunk values', data: values });
   }
 }

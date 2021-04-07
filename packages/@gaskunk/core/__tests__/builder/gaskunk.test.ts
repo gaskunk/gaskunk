@@ -1,5 +1,4 @@
 import { gaskunk } from '../../src/gaskunk';
-import { MethodBuilder } from '../../src/method/builder';
 interface User {
   id: number; // primary
   userName: string;
@@ -9,10 +8,11 @@ interface User {
   updatedAt: Date;
 }
 
-const db = gaskunk<User>({ client: 'Spreadsheet' });
+const db = gaskunk<User>({ client: 'spreadsheet' });
 
 describe('gaskunk - ', () => {
-  test('can return instance of MethodBuilder', () => {
-    expect(db('foo').select('id').build()).toBeInstanceOf([{ id: 1 }]);
+  test('select', async () => {
+    const res = await db('foo').select('id').build();
+    expect(res).toBeInstanceOf([{ id: 1 }]);
   });
 });
