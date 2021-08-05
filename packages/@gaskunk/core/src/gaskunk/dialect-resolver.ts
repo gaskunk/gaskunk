@@ -20,6 +20,9 @@ export const resolveDialect = (config: GaskunkConfig) => {
       builders.MethodBuilder = SpreadsheetMethodBuilder;
       builders.SchemaBuilder = SpreadsheetSchemaBuilder;
       return builders;
+    // TODO:
+    // case 'drive':
+    //   return builders;
     default:
       return builders;
   }

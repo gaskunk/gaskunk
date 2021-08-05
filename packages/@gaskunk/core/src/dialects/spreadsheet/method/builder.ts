@@ -7,7 +7,7 @@ export class SpreadsheetMethodBuilder<T> {
     else throw new Error('failed to build method chain, response is empty');
   }
 
-  constructor(tableName: string, options: any = {}) {
+  constructor(tableName: string, options: { [key: string]: any } = {}) {
     this._tableName = tableName;
     this._response = null;
   }
