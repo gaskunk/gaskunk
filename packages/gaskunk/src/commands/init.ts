@@ -2,6 +2,7 @@ import { info, error, success } from '../messages';
 import path from 'path';
 import { promises as fsPromises } from 'fs';
 import execa from 'execa';
+import { getClaspCmd } from '../helpers';
 
 const createDirs = async (
   projectRoot: string,
@@ -17,7 +18,9 @@ const createDirs = async (
 const createClaspApp = async (projectRoot: string, publishDir: string) => {
   info('create project by clasp...', '🏠');
   process.chdir(projectRoot);
-  await execa('npx', ['clasp', 'create', '--type', 'sheet']);
+
+  await execa(getClaspCmd(), ['create', '--type', 'sheet']);
+
   const appsScriptJson = await fsPromises.readFile(
     path.join(projectRoot, 'appsscript.json')
   );
@@ -26,6 +29,20 @@ const createClaspApp = async (projectRoot: string, publishDir: string) => {
     appsScriptJson
   );
   await fsPromises.unlink(path.join(projectRoot, 'appsscript.json'));
+
+  const claspJsonFile = await fsPromises.readFile(
+    path.join(projectRoot, '.clasp.json')
+  );
+  const claspJson = JSON.parse(claspJsonFile.toString());
+  const newClaspJson = {
+    ...claspJson,
+    rootDir: `./${publishDir}`,
+  };
+  await fsPromises.writeFile(
+    path.join(projectRoot, '.clasp.json'),
+    JSON.stringify(newClaspJson)
+  );
+
   success('created project by clasp');
 };
 
