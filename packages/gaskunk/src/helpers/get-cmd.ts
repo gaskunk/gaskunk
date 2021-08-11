@@ -5,7 +5,6 @@
 import execa from 'execa';
 
 let installCmd: 'yarn' | 'npm' | undefined;
-let claspCmd: 'clasp' | 'npx clasp' | undefined;
 
 export const getInstallCmd = () => {
   if (installCmd) {
@@ -20,19 +19,4 @@ export const getInstallCmd = () => {
   }
 
   return installCmd;
-};
-
-export const getClaspCmd: () => 'clasp' | 'npx clasp' = () => {
-  if (claspCmd) {
-    return claspCmd;
-  }
-
-  try {
-    execa.sync('clasp', ['-v']);
-    claspCmd = 'clasp';
-  } catch (e) {
-    claspCmd = 'npx clasp';
-  }
-
-  return claspCmd;
 };
