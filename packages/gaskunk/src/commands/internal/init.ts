@@ -1,22 +1,28 @@
-import { output } from '../messages';
+import { guide, output } from '../../messages';
 import path from 'path';
 import { promises as fsPromises } from 'fs';
 import execa from 'execa';
-import { getClaspCmd } from '../helpers';
+import { getClaspCmd, getInstallCmd } from '../../helpers';
 
 const createDirs = async (
   projectRoot: string,
   srcDir: string,
   publishDir: string
 ) => {
-  await fsPromises.mkdir(projectRoot);
+  await fsPromises.mkdir(projectRoot, { recursive: true });
 
-  await fsPromises.mkdir(path.join(projectRoot, srcDir));
-  await fsPromises.mkdir(path.join(projectRoot, publishDir));
+  await fsPromises.mkdir(path.join(projectRoot, srcDir), { recursive: true });
+  await fsPromises.mkdir(path.join(projectRoot, publishDir), {
+    recursive: true,
+  });
 };
 
-const createClaspApp = async (projectRoot: string, publishDir: string) => {
-  output.info('create project by clasp...', '🏠');
+const createClaspApp = async (
+  projectRoot: string,
+  publishDir: string,
+  projectName: string
+) => {
+  output.info(`create ${projectName} with gaskunk...`, '🏠');
   process.chdir(projectRoot);
 
   await execa(getClaspCmd(), ['create', '--type', 'sheet']);
@@ -43,7 +49,7 @@ const createClaspApp = async (projectRoot: string, publishDir: string) => {
     JSON.stringify(newClaspJson)
   );
 
-  output.success('created project by clasp');
+  output.success(`created ${projectName}`);
 };
 
 const installDeps = () => {};
@@ -56,11 +62,11 @@ export const init = async (
   publishDir: string
 ) => {
   const projectRoot = path.resolve(projectName);
+  const installCmd = getInstallCmd();
 
   await createDirs(projectRoot, srcDir, publishDir);
 
-  await createClaspApp(projectRoot, publishDir);
+  await createClaspApp(projectRoot, publishDir, projectName);
 
-  output.info('build command: webpack', '⚙️');
-  output.info('deploy command: clasp push', '⚙️');
+  guide(installCmd, projectName);
 };

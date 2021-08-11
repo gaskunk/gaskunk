@@ -2,7 +2,7 @@ import chalk from 'chalk';
 import { createGaskunkMessage } from './internal';
 
 export const info = (msg: string, emoji?: string) => {
-  console.log(`${emoji ? emoji + ` ${msg}` : createGaskunkMessage(msg)} \n`);
+  console.log(`${emoji ? `${emoji} ${msg}` : createGaskunkMessage(msg)} \n`);
 };
 
 export const error = (msg: string) => {

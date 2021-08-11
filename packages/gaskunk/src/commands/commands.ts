@@ -1,5 +1,5 @@
 import { output } from '../messages';
-import { init } from './init';
+import { init } from './internal';
 import fs from 'fs';
 
 export const commands = (
