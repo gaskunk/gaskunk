@@ -1,6 +1,6 @@
-import chalk from 'chalk';
-import { createGaskunkMessage } from '../messages/internal';
+import { output } from '../messages';
 import { init } from './init';
+import fs from 'fs';
 
 export const commands = (
   appInit: string,
@@ -8,11 +8,14 @@ export const commands = (
   srcDir: string,
   publishDir: string
 ) => {
-  console.log(chalk.bold(createGaskunkMessage('Welcome!')));
+  output.info('Welcome!');
+
+  if (fs.existsSync(projectName)) {
+    output.error(`${projectName} is already exist`);
+    process.exit(1);
+  }
 
   if (appInit === 'init') {
     init(projectName, srcDir, publishDir);
-  } else {
-    // output error
   }
 };

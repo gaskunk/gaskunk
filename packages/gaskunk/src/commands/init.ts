@@ -1,4 +1,4 @@
-import { info, error, success } from '../messages';
+import { output } from '../messages';
 import path from 'path';
 import { promises as fsPromises } from 'fs';
 import execa from 'execa';
@@ -16,7 +16,7 @@ const createDirs = async (
 };
 
 const createClaspApp = async (projectRoot: string, publishDir: string) => {
-  info('create project by clasp...', '🏠');
+  output.info('create project by clasp...', '🏠');
   process.chdir(projectRoot);
 
   await execa(getClaspCmd(), ['create', '--type', 'sheet']);
@@ -43,7 +43,7 @@ const createClaspApp = async (projectRoot: string, publishDir: string) => {
     JSON.stringify(newClaspJson)
   );
 
-  success('created project by clasp');
+  output.success('created project by clasp');
 };
 
 const installDeps = () => {};
@@ -55,11 +55,12 @@ export const init = async (
   srcDir: string,
   publishDir: string
 ) => {
-  const projectRoot = path.join(__dirname, projectName);
+  const projectRoot = path.resolve(projectName);
+
   await createDirs(projectRoot, srcDir, publishDir);
 
   await createClaspApp(projectRoot, publishDir);
 
-  info('build command: webpack', '⚙️');
-  info('deploy command: clasp push', '⚙️');
+  output.info('build command: webpack', '⚙️');
+  output.info('deploy command: clasp push', '⚙️');
 };

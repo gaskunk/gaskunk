@@ -95,3 +95,5 @@ examples/**/.clasp.json
 
 # Experimental dir 
 examples/**/dist/index.js
+
+samples/

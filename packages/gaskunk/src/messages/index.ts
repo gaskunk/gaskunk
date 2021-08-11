@@ -1,1 +1,1 @@
-export * from './output';
+export * as output from './output';

@@ -24,6 +24,6 @@ program
     )} ${chalk.green('[publish-directory]')} `
   )
   .action((init, projectName, srcDir, publishDir) => {
-    commands(init, projectName, srcDir ?? 'src', publishDir ?? 'publish');
+    commands(init, projectName, srcDir ?? 'src', publishDir ?? 'dist');
   })
   .parse(process.argv);
