@@ -226,7 +226,7 @@ typings/
       target: 'ES5',
       lib: ['dom', 'esnext', 'dom.iterable'],
       declaration: true,
-      sourceMap: true,
+      declarationMap: true,
       strict: true,
       esModuleInterop: true,
       allowSyntheticDefaultImports: true,
@@ -296,6 +296,8 @@ module.exports = {
 
   output.success('created config files');
 };
+
+const createSampleFiles = async (projectRoot: string) => {};
 
 export const init = async (
   projectName: string,
