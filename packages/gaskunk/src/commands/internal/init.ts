@@ -103,7 +103,11 @@ const initialize = async (projectRoot: string) => {
   output.success('installed dependencies');
 };
 
-const createConfigFiles = async (projectRoot: string) => {
+const createConfigFiles = async (
+  projectRoot: string,
+  srcDir: string,
+  publishDir: string
+) => {
   output.info('create config files...');
   const gitignore = `### https://raw.github.com/github/gitignore/85bf08b19a77c62d7b6286c2db8811f2ff373b0f/Node.gitignore
 
@@ -232,8 +236,8 @@ typings/
   const webpackConfig = `const path = require('path');
 const GasPlugin = require('gas-webpack-plugin');
 
-const SRC_PATH = path.resolve(__dirname, './src');
-const DIST_PATH = path.resolve(__dirname, './dist');
+const SRC_PATH = path.resolve(__dirname, './${srcDir}');
+const DIST_PATH = path.resolve(__dirname, './${publishDir}');
 
 module.exports = {
   mode: 'production',
@@ -304,7 +308,7 @@ export const init = async (
   await createDirs(projectRoot, srcDir, publishDir);
   await createClaspApp(projectRoot, publishDir, projectName);
   await initialize(projectRoot);
-  await createConfigFiles(projectRoot);
+  await createConfigFiles(projectRoot, srcDir, publishDir);
 
   guide(installCmd, projectName);
 };

@@ -3,7 +3,7 @@ import { init } from './internal';
 import fs from 'fs';
 
 export const commands = (
-  appInit: string,
+  type: string,
   projectName: string,
   srcDir: string,
   publishDir: string
@@ -15,7 +15,11 @@ export const commands = (
     process.exit(1);
   }
 
-  if (appInit === 'init') {
+  if (type === 'init') {
     init(projectName, srcDir, publishDir);
+  }
+
+  if (type === 'migrate') {
+    // TODO: migrate
   }
 };
