@@ -1,1 +1,1 @@
-export type GaskunkConfig = { client: 'spreadsheet' | 'drive' };
+export type GaskunkConfig = { client?: 'spreadsheet' | 'drive' };

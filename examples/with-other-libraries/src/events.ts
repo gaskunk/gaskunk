@@ -1,10 +1,17 @@
-import { Skunk } from './entity';
 import { createOutput } from '../../utils/gas-content-service';
+import { gaskunk } from '@gaskunk/core';
 interface DoGetEvents extends GoogleAppsScript.Events.DoGet {
   parameter: {
     action?: string;
   };
 }
+
+interface Skunk {
+  name: string;
+  description: string;
+}
+
+const skunk = gaskunk<Skunk>({ client: 'spreadsheet' });
 
 // const skunk = new Skunk();
 // skunk.id = 0;
@@ -12,14 +19,28 @@ interface DoGetEvents extends GoogleAppsScript.Events.DoGet {
 // skunk.description = '🦨';
 // skunk.save();
 
-export function doGet(e: DoGetEvents) {
+export async function doGet(e: DoGetEvents) {
   if (e.parameter.action === 'skunk') {
     // const values = skunk.find();
-    const values = SpreadsheetApp.getActiveSpreadsheet()
+    const one = SpreadsheetApp.getActive()
       .getSheets()[0]
       .getRange(1, 1)
       .getValues();
-    return values && createOutput({ message: 'Skunk values', data: values });
+
+    const all = SpreadsheetApp.getActive()
+      .getSheetByName('Skunk')
+      ?.getDataRange()
+      .getValues();
+
+    const names = await skunk('Skunk')?.select('name').build();
+    console.log(names);
+
+    const data = {
+      one,
+      all,
+      names: names,
+    };
+    return createOutput({ message: 'Skunk values', data });
   }
 }
 

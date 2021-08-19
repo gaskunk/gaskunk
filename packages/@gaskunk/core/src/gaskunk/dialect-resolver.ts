@@ -4,26 +4,29 @@ import {
   SpreadsheetSchemaBuilder,
 } from '../dialects';
 
-type Builders = {
-  MethodBuilder: typeof SpreadsheetMethodBuilder | null;
-  SchemaBuilder: typeof SpreadsheetSchemaBuilder | null;
-};
-
 // extends builder & method for spreadsheet
-export const resolveDialect = (config: GaskunkConfig) => {
-  const builders: Builders = {
-    MethodBuilder: null,
-    SchemaBuilder: null,
-  };
+export const resolveDialect = (config?: GaskunkConfig) => {
+  if (config == null) {
+    // default builders are prepared for spreadsheet
+    return {
+      MethodBuilder: SpreadsheetMethodBuilder,
+      SchemaBuilder: SpreadsheetSchemaBuilder,
+    };
+  }
+
   switch (config.client) {
     case 'spreadsheet':
-      builders.MethodBuilder = SpreadsheetMethodBuilder;
-      builders.SchemaBuilder = SpreadsheetSchemaBuilder;
-      return builders;
+      return {
+        MethodBuilder: SpreadsheetMethodBuilder,
+        SchemaBuilder: SpreadsheetSchemaBuilder,
+      };
     // TODO:
     // case 'drive':
     //   return builders;
     default:
-      return builders;
+      return {
+        MethodBuilder: SpreadsheetMethodBuilder,
+        SchemaBuilder: SpreadsheetSchemaBuilder,
+      };
   }
 };

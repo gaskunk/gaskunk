@@ -1,18 +1,56 @@
 export class SpreadsheetMethodBuilder<T> {
-  private _tableName: string;
-  private _response: T[] | null;
+  private sheets: GoogleAppsScript.Spreadsheet.Spreadsheet | null;
+  private tableName: string;
+  private sheet: GoogleAppsScript.Spreadsheet.Sheet | null | undefined;
 
-  async build() {
-    if (this._response) return this._response;
-    else throw new Error('failed to build method chain, response is empty');
-  }
+  private columnNames: (keyof T)[];
+
+  private response: Partial<T>[] | null | undefined;
 
   constructor(tableName: string, options: { [key: string]: any } = {}) {
-    this._tableName = tableName;
-    this._response = null;
+    this.sheets = SpreadsheetApp.getActive();
+    this.tableName = tableName;
+    this.sheet = this.sheets.getSheetByName(tableName);
+
+    this.columnNames = this.sheet?.getDataRange().getValues()[0] ?? [];
+
+    this.response = null;
   }
 
-  select(arg: keyof T) {
+  build() {
+    return new Promise<SpreadsheetMethodBuilder<T>['response']>(
+      (resolve, reject) => {
+        if (this.response) {
+          resolve(this.response);
+        } else {
+          reject('failed to build method chain, response is empty');
+        }
+      }
+    );
+  }
+
+  select(arg: keyof T | '*') {
+    const values = this.getAllValues();
+    const property: NonNullable<
+      SpreadsheetMethodBuilder<T>['response']
+    >[number] = {};
+
+    if (arg === '*') {
+      this.response = values.map((value) => {
+        value.forEach((v, i) => {
+          property[this.columnNames[i]] = v;
+        });
+        return property;
+      });
+    } else {
+      const columnIndex = this.columnNames.indexOf(arg);
+
+      this.response = values.map((value) => {
+        property[this.columnNames[columnIndex]] = value[columnIndex];
+        return property;
+      });
+    }
+
     return this;
   }
 
@@ -24,12 +62,13 @@ export class SpreadsheetMethodBuilder<T> {
     return this;
   }
 
-  from() {
+  from(tableName: string) {
+    this.sheet = this.sheets?.getSheetByName(tableName);
     return this;
   }
 
   with() {
-    this._tableName;
+    this.tableName;
     return this;
   }
 
@@ -77,7 +116,8 @@ export class SpreadsheetMethodBuilder<T> {
     return this;
   }
 
-  insert() {
+  insert(args: { [P in keyof T]: any }[]) {
+    args.forEach((arg) => {});
     return this;
   }
 
@@ -116,4 +156,10 @@ export class SpreadsheetMethodBuilder<T> {
   pluck() {}
 
   first() {}
+
+  private getAllValues() {
+    const all = this.sheet?.getDataRange().getValues() ?? [[]];
+    const [_, ...values] = all;
+    return values;
+  }
 }
