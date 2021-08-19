@@ -97,3 +97,5 @@ examples/**/.clasp.json
 examples/**/dist/index.js
 
 samples/
+
+.vscode/

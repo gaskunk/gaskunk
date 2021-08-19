@@ -20,7 +20,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "clean": "rimraf lib/"
   },
   "bugs": {
     "url": "https://github.com/shuta13/gaskunk/issues"
