@@ -18,15 +18,11 @@ export class SpreadsheetMethodBuilder<T> {
   }
 
   build() {
-    return new Promise<SpreadsheetMethodBuilder<T>['response']>(
-      (resolve, reject) => {
-        if (this.response) {
-          resolve(this.response);
-        } else {
-          reject('failed to build method chain, response is empty');
-        }
-      }
-    );
+    if (this.response) {
+      return this.response;
+    } else {
+      throw new Error('failed to build method chain, response is empty');
+    }
   }
 
   select(arg: keyof T | '*') {
