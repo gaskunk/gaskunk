@@ -321,7 +321,7 @@ export function doGet(e: DoGetEvents) {
     indexTs
   );
   await fsPromises.writeFile(
-    path.join(projectRoot, `${srcDirName}/index.ts`),
+    path.join(projectRoot, `${srcDirName}/events.ts`),
     eventsTs
   );
 
