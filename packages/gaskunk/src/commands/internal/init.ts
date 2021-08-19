@@ -260,19 +260,6 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js'],
   },
-  optimization: {
-    minimizer: [
-      (compiler) => {
-        const TerserPlugin = require('terser-webpack-plugin');
-        new TerserPlugin({
-          extractComments: false,
-          terserOptions: {
-            keep_classnames: true,
-          },
-        }).apply(compiler);
-      },
-    ],
-  },
   plugins: [new GasPlugin()],
 };
 `;
