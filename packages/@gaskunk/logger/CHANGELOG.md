@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.8](https://github.com/shuta13/gaskunk/tree/main/packages/@gaskunk/logger/compare/v0.1.7...v0.1.8) (2021-08-19)
+
+**Note:** Version bump only for package @gaskunk/logger
+
+
+
+
+
 ## [0.1.6](https://github.com/shuta13/gaskunk/tree/main/packages/@gaskunk/logger/compare/v0.1.5...v0.1.6) (2021-03-16)
 
 

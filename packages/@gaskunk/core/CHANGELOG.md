@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.8](https://github.com/shuta13/gaskunk/tree/main/packages/@gaskunk/core/compare/v0.1.7...v0.1.8) (2021-08-19)
+
+
+### Bug Fixes
+
+* modify for `doGet` cannot return promise ([d45205b](https://github.com/shuta13/gaskunk/tree/main/packages/@gaskunk/core/commit/d45205b2a8a5f83ed02562f2ca4be18604435b1a))
+
+
+### Features
+
+* add methods ([d3cb3bc](https://github.com/shuta13/gaskunk/tree/main/packages/@gaskunk/core/commit/d3cb3bc9de5d5eba9cefed188bb4a1cb11bf89ce))
+* hasId ([a8541ac](https://github.com/shuta13/gaskunk/tree/main/packages/@gaskunk/core/commit/a8541ac3d06882c0e73159734fad880578b4b3ba))
+
+
+
+
+
 ## [0.1.7](https://github.com/shuta13/gaskunk/tree/main/packages/@gaskunk/core/compare/v0.1.6...v0.1.7) (2021-03-16)
 
 **Note:** Version bump only for package @gaskunk/core
