@@ -27,7 +27,6 @@ const createOutput = <T extends object>(args: CreateOutputArgs<T>) => {
 
 export function doGet(e: DoGetEvents) {
   if (e.parameter.action === 'skunk') {
-    // const values = skunk.find();
     const one = SpreadsheetApp.getActive()
       .getSheets()[0]
       .getRange(1, 1)

@@ -6,19 +6,21 @@ import { getInstallCmd } from '../../helpers';
 
 const createDirs = async (
   projectRoot: string,
-  srcDir: string,
-  publishDir: string
+  srcDirName: string,
+  publishDirName: string
 ) => {
   await fsPromises.mkdir(projectRoot, { recursive: true });
-  await fsPromises.mkdir(path.join(projectRoot, srcDir), { recursive: true });
-  await fsPromises.mkdir(path.join(projectRoot, publishDir), {
+  await fsPromises.mkdir(path.join(projectRoot, srcDirName), {
+    recursive: true,
+  });
+  await fsPromises.mkdir(path.join(projectRoot, publishDirName), {
     recursive: true,
   });
 };
 
 const createClaspApp = async (
   projectRoot: string,
-  publishDir: string,
+  publishDirName: string,
   projectName: string
 ) => {
   output.info(`create ${projectName} with gaskunk...`, '🏠');
@@ -30,7 +32,7 @@ const createClaspApp = async (
     path.join(projectRoot, 'appsscript.json')
   );
   await fsPromises.writeFile(
-    path.join(projectRoot, `${publishDir}/appsscript.json`),
+    path.join(projectRoot, `${publishDirName}/appsscript.json`),
     appsScriptJson
   );
   await fsPromises.unlink(path.join(projectRoot, 'appsscript.json'));
@@ -41,7 +43,7 @@ const createClaspApp = async (
   const claspJson = JSON.parse(claspJsonFile.toString());
   const newClaspJson = {
     ...claspJson,
-    rootDir: `./${publishDir}`,
+    rootDir: `./${publishDirName}`,
   };
   await fsPromises.writeFile(
     path.join(projectRoot, '.clasp.json'),
@@ -52,7 +54,7 @@ const createClaspApp = async (
 };
 
 const initialize = async (projectRoot: string) => {
-  output.info('install dependencies...', '🔧');
+  output.info('initializing...', '🔧');
   process.chdir(projectRoot);
   const installCmd = getInstallCmd();
 
@@ -60,7 +62,6 @@ const initialize = async (projectRoot: string) => {
   const packageJsonStr = await (
     await fsPromises.readFile(path.join(projectRoot, 'package.json'))
   ).toString();
-  output.info('initializing...');
   const packageJson = JSON.parse(packageJsonStr);
   const scripts = {
     build: 'webpack',
@@ -76,21 +77,12 @@ const initialize = async (projectRoot: string) => {
     path.join(projectRoot, 'package.json'),
     JSON.stringify(newPackageJson, undefined, 2)
   );
-  output.success('initialized');
 
-  output.info('install dependencies...', '🔧');
   const deps = [
-    '@babel/core',
-    '@babel/plugin-proposal-class-properties',
-    '@babel/plugin-proposal-nullish-coalescing-operator',
-    '@babel/plugin-proposal-object-rest-spread',
-    '@babel/plugin-proposal-optional-chaining',
-    '@babel/preset-env',
-    '@babel/preset-typescript',
     '@gaskunk/core',
     '@google/clasp',
     '@types/google-apps-script',
-    'babel-loader',
+    'ts-loader',
     'gas-webpack-plugin',
     'typescript',
     'webpack',
@@ -100,15 +92,15 @@ const initialize = async (projectRoot: string) => {
   const useYarn = installCmd === 'yarn';
   const installDepsCmd = useYarn ? 'add' : 'install';
   await execa(installCmd, [installDepsCmd, 'install', '-D', ...deps]);
-  output.success('installed dependencies');
+  output.success('initialized');
 };
 
 const createConfigFiles = async (
   projectRoot: string,
-  srcDir: string,
-  publishDir: string
+  srcDirName: string,
+  publishDirName: string
 ) => {
-  output.info('create config files...');
+  output.info('create config files...', '🖌️');
   const gitignore = `### https://raw.github.com/github/gitignore/85bf08b19a77c62d7b6286c2db8811f2ff373b0f/Node.gitignore
 
 # Logs
@@ -204,29 +196,11 @@ typings/
 .clasp.json
 `;
 
-  const babelConfig = `module.exports = (api) => {
-  api.cache(true);
-
-  const presets = ['@babel/preset-env', '@babel/preset-typescript'];
-
-  const plugins = [
-    '@babel/plugin-proposal-class-properties',
-    '@babel/plugin-proposal-object-rest-spread',
-    '@babel/plugin-proposal-nullish-coalescing-operator',
-    '@babel/plugin-proposal-optional-chaining',
-  ];
-
-  return { presets, plugins };
-};
-`;
-
   const tsconfigJson = {
     compilerOptions: {
       module: 'commonjs',
       target: 'ES5',
       lib: ['dom', 'esnext', 'dom.iterable'],
-      declaration: true,
-      declarationMap: true,
       strict: true,
       esModuleInterop: true,
       allowSyntheticDefaultImports: true,
@@ -236,8 +210,8 @@ typings/
   const webpackConfig = `const path = require('path');
 const GasPlugin = require('gas-webpack-plugin');
 
-const SRC_PATH = path.resolve(__dirname, './${srcDir}');
-const DIST_PATH = path.resolve(__dirname, './${publishDir}');
+const SRC_PATH = path.resolve(__dirname, './${srcDirName}');
+const DIST_PATH = path.resolve(__dirname, './${publishDirName}');
 
 module.exports = {
   mode: 'production',
@@ -251,9 +225,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.[tj]s$/,
-        exclude: '/node_modules/',
-        loader: 'babel-loader',
+        test: /\.ts$/,
+        loader: 'ts-loader',
       },
     ],
   },
@@ -269,10 +242,6 @@ module.exports = {
     gitignore
   );
   await fsPromises.writeFile(
-    path.resolve(projectRoot, 'babel.config.js'),
-    babelConfig
-  );
-  await fsPromises.writeFile(
     path.resolve(projectRoot, 'tsconfig.json'),
     JSON.stringify(tsconfigJson, undefined, 2)
   );
@@ -284,20 +253,94 @@ module.exports = {
   output.success('created config files');
 };
 
-const createSampleFiles = async (projectRoot: string) => {};
+const createSampleFiles = async (projectRoot: string, srcDirName: string) => {
+  output.info('create sample files...', '🌟');
+
+  const indexTs = `import { doGet } from './events';
+
+declare const global: {
+  [key: string]: unknown;
+};
+
+global.doGet = doGet;
+`;
+
+  const eventsTs = `import { gaskunk } from '@gaskunk/core';
+
+interface DoGetEvents extends GoogleAppsScript.Events.DoGet {
+  parameter: {
+    action?: string;
+  };
+}
+
+interface Skunk {
+  name: string;
+  description: string;
+}
+
+interface CreateOutputArgs<T = {}> {
+  message: string;
+  data?: T;
+}
+
+const skunk = gaskunk<Skunk>({ client: 'spreadsheet' });
+
+const createOutput = <T extends object>(args: CreateOutputArgs<T>) => {
+  const { message, data } = args;
+  return ContentService.createTextOutput(
+    JSON.stringify({ status: 200, message: message, data: data })
+  ).setMimeType(ContentService.MimeType.JSON);
+};
+
+export function doGet(e: DoGetEvents) {
+  if (e.parameter.action === 'skunk') {
+    const one = SpreadsheetApp.getActive()
+      .getSheets()[0]
+      .getRange(1, 1)
+      .getValues();
+
+    const all = SpreadsheetApp.getActive()
+      .getSheetByName('Skunk')
+      ?.getDataRange()
+      .getValues();
+
+    const names = skunk('Skunk')?.select('name').build();
+
+    const data = {
+      one,
+      all,
+      names: names,
+    };
+    return createOutput({ message: 'Skunk values', data });
+  }
+}
+`;
+
+  await fsPromises.writeFile(
+    path.join(projectRoot, `${srcDirName}/index.ts`),
+    indexTs
+  );
+  await fsPromises.writeFile(
+    path.join(projectRoot, `${srcDirName}/index.ts`),
+    eventsTs
+  );
+
+  output.success('created sample files');
+};
 
 export const init = async (
   projectName: string,
-  srcDir: string,
-  publishDir: string
+  srcDirName: string,
+  publishDirName: string
 ) => {
   const projectRoot = path.resolve(projectName);
   const installCmd = getInstallCmd();
 
-  await createDirs(projectRoot, srcDir, publishDir);
-  await createClaspApp(projectRoot, publishDir, projectName);
+  await createDirs(projectRoot, srcDirName, publishDirName);
+  await createClaspApp(projectRoot, publishDirName, projectName);
   await initialize(projectRoot);
-  await createConfigFiles(projectRoot, srcDir, publishDir);
+  await createConfigFiles(projectRoot, srcDirName, publishDirName);
+  await createSampleFiles(projectRoot, srcDirName);
 
   guide(installCmd, projectName);
 };
