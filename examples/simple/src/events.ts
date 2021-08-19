@@ -1,4 +1,4 @@
-// import { gaskunk } from '@gaskunk/core';
+import { gaskunk } from '@gaskunk/core';
 
 interface DoGetEvents extends GoogleAppsScript.Events.DoGet {
   parameter: {
@@ -16,7 +16,7 @@ interface CreateOutputArgs<T = {}> {
   data?: T;
 }
 
-// const skunk = gaskunk<Skunk>({ client: 'spreadsheet' });
+const skunk = gaskunk<Skunk>({ client: 'spreadsheet' });
 
 const createOutput = <T extends object>(args: CreateOutputArgs<T>) => {
   const { message, data } = args;
@@ -38,13 +38,12 @@ export function doGet(e: DoGetEvents) {
       ?.getDataRange()
       .getValues();
 
-    // const names = await skunk('Skunk')?.select('name').build();
-    // console.log(names);
+    const names = skunk('Skunk')?.select('name').build();
 
     const data = {
       one,
       all,
-      // names: names,
+      names: names,
     };
     return createOutput({ message: 'Skunk values', data });
   }
