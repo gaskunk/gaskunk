@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "with-other-libraries",
+  "name": "simple",
   "version": "0.1.7",
   "main": "index.js",
   "scripts": {
