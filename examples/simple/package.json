@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "simple",
-  "version": "0.1.8",
+  "version": "0.2.0",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
@@ -11,7 +11,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@gaskunk/core": "0.1.8",
+    "@gaskunk/core": "0.2.0",
     "@google/clasp": "^2.3.0",
     "@types/google-apps-script": "^1.0.27",
     "dayjs": "^1.10.4",
