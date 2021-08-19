@@ -1,18 +1,19 @@
 import { gaskunk } from '../../src/gaskunk';
+
 interface User {
-  id: number; // primary
+  // id: number; // primary
   userName: string;
   age: number;
   isActive: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }
 
 const db = gaskunk<User>({ client: 'spreadsheet' });
 
-describe('gaskunk - ', () => {
+describe('gaskunk', () => {
   test('select', async () => {
-    const res = await db('foo').select('id').build();
-    expect(res).toBeInstanceOf([{ id: 1 }]);
+    const res = await db('foo').select('userName').build();
+    expect(res).toMatchObject([{ userName: 'skunk' }]);
   });
 });
