@@ -1,5 +1,5 @@
-import { createOutput } from '../../utils/gas-content-service';
 import { gaskunk } from '@gaskunk/core';
+
 interface DoGetEvents extends GoogleAppsScript.Events.DoGet {
   parameter: {
     action?: string;
@@ -11,13 +11,19 @@ interface Skunk {
   description: string;
 }
 
+interface CreateOutputArgs<T = {}> {
+  message: string;
+  data?: T;
+}
+
 const skunk = gaskunk<Skunk>({ client: 'spreadsheet' });
 
-// const skunk = new Skunk();
-// skunk.id = 0;
-// skunk.name = 'gaskunk';
-// skunk.description = '🦨';
-// skunk.save();
+const createOutput = <T extends object>(args: CreateOutputArgs<T>) => {
+  const { message, data } = args;
+  return ContentService.createTextOutput(
+    JSON.stringify({ status: 200, message: message, data: data })
+  ).setMimeType(ContentService.MimeType.JSON);
+};
 
 export async function doGet(e: DoGetEvents) {
   if (e.parameter.action === 'skunk') {
@@ -43,43 +49,3 @@ export async function doGet(e: DoGetEvents) {
     return createOutput({ message: 'Skunk values', data });
   }
 }
-
-// finally, like shown below
-
-// library
-// const gaskunk = <T extends object>(tabName: string) => {
-//   return {
-//     select: async (query: keyof T) => {
-//       if (query) {
-//         /**
-//          * need typecheck
-//          * equally user's interface includes type of response -> return
-//          */
-//         return tabName;
-//       } else {
-//         throw new Error(tabName);
-//       }
-//     },
-//   };
-// };
-
-// user code
-// interface Gaskunk {
-//   id: number; // primary
-//   userName: string;
-//   age: number;
-//   isActive: boolean;
-//   createdAt: Date;
-//   updatedAt: Date;
-// }
-
-// (async () => {
-//   try {
-//     /**
-//      * hope Array<Gaskunk["id"]>
-//      */
-//     const ids = await gaskunk<Gaskunk>('gaskunk').select('id');
-//   } catch (error) {
-//     throw new Error(error.message);
-//   }
-// })();
