@@ -18,7 +18,7 @@
     "watch": "tsc -w",
     "clean": "rimraf lib/"
   },
-  "gitHead": "91aab192ed69b54bc56d75070204aa941b5c8824",
+  "gitHead": "36a6c351eb7654e1af45ed994f4164c3e9154d43",
   "dependencies": {
     "chalk": "^4.1.2",
     "commander": "^8.1.0",

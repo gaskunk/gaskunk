@@ -27,7 +27,7 @@
   "bugs": {
     "url": "https://github.com/shuta13/gaskunk/issues"
   },
-  "gitHead": "b73747890389d6e7cbf7483bf352ff4b33b1519c",
+  "gitHead": "36a6c351eb7654e1af45ed994f4164c3e9154d43",
   "dependencies": {
     "@gaskunk/error": "0.2.0",
     "@gaskunk/logger": "0.2.0",
